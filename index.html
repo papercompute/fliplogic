@@ -1,1 +1,183 @@
-fl.html
+<!DOCTYPE html>
+<html lang="en" manifest="cache.appcache">
+<head>
+ <meta charset="utf-8">
+ <title>fliplogic</title>
+
+ <meta name="HandheldFriendly" content="True">
+ <meta name="MobileOptimized" content="320">
+ <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+
+<style>
+
+.zeropoint{
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ width:10%;
+ height:10%;
+ transform: translate(-50%, -50%);
+
+ max-width: 100px;
+ max-height: 100px; 
+}
+
+.gamebox{
+ position: absolute;
+ top: -100%;
+ left: -100%;
+ width:100%;
+ height:100%;
+ background: green;
+}
+
+</style>
+
+</head>
+<body>
+  <div class="zeropoint">
+<!--
+    <div class="gamebox" style="left:0%;top:-100%;background:red;"></div>
+    <div class="gamebox" style="left:-100%;top:-100%;background:yellow;"></div>
+    <div class="gamebox" style="left:-200%;top:-300%;background:blue;"></div>
+    <div class="gamebox" style="left:100%;top:0%;background:black;"></div>
+-->
+  </div>
+
+
+<script src="jquery-2.1.1.min.js"></script>
+
+<script>
+
+const COLORS = ["orange","gray","blue"];
+
+
+function checkBoxesColor(){
+var boxes=document.querySelectorAll(".gamebox");
+var color = boxes[0].style.backgroundColor;
+for (var i=1;i<boxes.length;i++){
+ if( boxes[i].style.backgroundColor != color ) {return false;}
+}
+return true;
+}
+
+function updateColor(e){
+
+var ci=COLORS.indexOf(e.style.backgroundColor); 
+if(ci>=0){
+ ci=(ci+1) % COLORS.length; 
+ e.style.backgroundColor = COLORS[ci];
+}
+else{
+ e.style.backgroundColor = COLORS[0];
+}
+
+}
+
+
+function onclick(e){
+console.log(e.target.style.backgroundColor);
+console.log(e.target.style.left);
+console.log(e.target.style.top);
+
+//updateColor(e.target);
+
+var eleft=parseInt(e.target.style.left.slice(0, -1));
+var etop=parseInt(e.target.style.top.slice(0, -1));
+
+console.log(eleft);console.log(etop);
+
+var boxes=document.querySelectorAll(".gamebox");
+for (var i=0;i<boxes.length;i++){
+ var x=boxes[i];
+ var xleft=parseInt(x.style.left.slice(0, -1));
+ var xtop=parseInt(x.style.top.slice(0, -1));
+// console.log(eleft); console.log(etop);
+ if( Math.abs(xleft - eleft) <= 100 && Math.abs(xtop - etop) <= 100 ){
+//  updateColor(boxes[i]);
+ console.log(x,xleft,xtop,Math.abs(xleft - eleft),Math.abs(xtop - etop));
+ updateColor(x);
+ }
+}
+
+if(checkBoxesColor()){
+console.log("Yooohoooooooooooooooooo!!!");
+}
+
+
+}
+
+(function(){
+
+var zp=document.querySelector(".zeropoint");
+
+var gb1 = document.createElement("div"); 
+gb1.setAttribute('class', 'gamebox'); gb1.setAttribute('style', 'left:0%;top:0%;background:red;');
+zp.appendChild(gb1);
+
+var gb2 = document.createElement("div"); 
+gb2.setAttribute('class', 'gamebox'); gb2.setAttribute('style', 'left:100%;top:100%;background:orange;');
+zp.appendChild(gb2);
+
+var gb3 = document.createElement("div"); 
+gb3.setAttribute('class', 'gamebox'); gb3.setAttribute('style', 'left:-100%;top:-100%;background:blue;');
+zp.appendChild(gb3);
+
+
+var gb4 = document.createElement("div"); 
+gb4.setAttribute('class', 'gamebox'); gb4.setAttribute('style', 'left:-100%;top:-200%;background:red;');
+zp.appendChild(gb4);
+
+
+var boxes=document.querySelectorAll(".gamebox");
+for (var i=0;i<boxes.length;i++){
+ boxes[i].onclick=onclick; 
+}
+
+}());
+
+function resize(){
+ console.log('resize!')
+
+var box=document.querySelector(".zeropoint");        
+
+var ww=window.innerWidth;
+var wh=window.innerHeight;
+var wm=Math.min(ww,wh);
+const p=0.125;
+const maxw=100;
+const maxh=100;
+console.log(ww);
+console.log(wh);
+var nw=Math.round(wm*p);if(nw>maxw){nw=maxw;}
+var nh=Math.round(wm*p);if(nh>maxh){nh=maxh;}
+console.log(nw);console.log(nh);
+box.style.width=nw+"px";
+box.style.height=nh+"px";
+}
+
+/*
+document.body.addEventListener("keydown", function (e) {
+console.log("keydown");
+});
+
+document.body.addEventListener("keyup", function (e) {
+console.log("keyup");
+});
+*/
+
+window.addEventListener("load", function () {
+console.log("load");
+resize();
+});
+
+window.addEventListener("resize", function(){
+ resize();
+}, true);
+
+</script>
+</body>
+</html>
+
+
+
