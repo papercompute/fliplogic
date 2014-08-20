@@ -27,7 +27,7 @@ min-height: 100px;
  top: 50%;
  width:10%;
  height:10%;
-/* transform: translate(-50%, -50%);*/
+ transform: translate(-50%, -50%);
 
  max-width: 100px;
  max-height: 100px; 
@@ -47,6 +47,10 @@ min-height: 100px;
 </style>
 
 </head>
+
+<!--
+<body ondragstart="return false;" ondrop="return false;">
+-->
 <body>
   <div class="zeropoint">
 <!--
@@ -87,6 +91,47 @@ else{
 
 }
 
+/*
+function onmousedown(e){
+console.log("onmousedown:",e);
+
+}
+
+function onmouseup(e){
+console.log("onmouseup:",e);
+}
+*/
+
+/*
+
+var timer;
+var status = 1;
+
+function singleClick(event) {
+ status = 1;
+ timer = setTimeout(function() {
+  if (status == 1) {
+    console.log('single click !');
+    onclick(event);
+  }
+ }, 250);
+}
+
+function doubleClick(event) {
+ clearTimeout(timer);
+ status = 0;
+ console.log('double click !');
+}
+
+
+function ondblclick(e){
+console.log("ondblclick");
+console.log(e.target.style.backgroundColor);
+console.log(e.target.style.left);
+console.log(e.target.style.top);
+return false;
+}
+*/
 
 function onclick(e){
 console.log(e.target.style.backgroundColor);
@@ -155,13 +200,22 @@ gb7.setAttribute('class', 'gamebox'); gb7.setAttribute('style', 'left:+300%;top:
 zp.appendChild(gb7);
 
 var gb8 = document.createElement("div"); 
-gb8.setAttribute('class', 'gamebox'); gb8.setAttribute('style', 'left:+400%;top:-300%;background:gray;');
+gb8.setAttribute('class', 'gamebox'); gb8.setAttribute('style', 'left:+300%;top:-300%;background:gray;');
 zp.appendChild(gb8);
+
+var gb9 = document.createElement("div"); 
+gb9.setAttribute('class', 'gamebox'); gb9.setAttribute('style', 'left:-300%;top:-300%;background:orange;');
+zp.appendChild(gb9);
 
 
 var boxes=document.querySelectorAll(".gamebox");
 for (var i=0;i<boxes.length;i++){
- boxes[i].onclick=onclick; 
+ //boxes[i].onclick=singleClick;
+  boxes[i].onclick=onclick;  
+ //boxes[i].ondblclick=doubleClick;
+// boxes[i].onmousedown=onmousedown;
+// boxes[i].onmouseup=onmouseup;
+
 }
 
 }());
@@ -203,6 +257,27 @@ document.body.addEventListener("keyup", function (e) {
 console.log("keyup");
 });
 */
+/*
+document.body.addEventListener("mousedown", function (e) {
+console.log("mousedown");
+});
+
+document.body.addEventListener("mouseup", function (e) {
+console.log("mouseup");
+});
+*/
+
+window.addEventListener("mousedown", function (e) {
+console.log("mousedown");
+console.log(e.target);
+return false;
+});
+
+window.addEventListener("mouseup", function (e) {
+console.log("mouseup");
+console.log(e.target);
+return false;
+});
 
 window.addEventListener("load", function () {
 console.log("load");
