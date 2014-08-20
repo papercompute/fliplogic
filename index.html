@@ -10,13 +10,24 @@
 
 <style>
 
+html {
+font-family: sans-serif;
+-ms-text-size-adjust: 100%;
+-webkit-text-size-adjust: 100%;
+}
+html,body {
+margin: 0;
+min-width: 100px;
+min-height: 100px;
+}
+
 .zeropoint{
  position: absolute;
  left: 50%;
  top: 50%;
  width:10%;
  height:10%;
- transform: translate(-50%, -50%);
+/* transform: translate(-50%, -50%);*/
 
  max-width: 100px;
  max-height: 100px; 
@@ -26,9 +37,11 @@
  position: absolute;
  top: -100%;
  left: -100%;
- width:100%;
- height:100%;
+ width:99%;
+ height:99%;
  background: green;
+ border-radius: 5px;
+/* border: 1px solid #000;*/
 }
 
 </style>
@@ -128,6 +141,23 @@ var gb4 = document.createElement("div");
 gb4.setAttribute('class', 'gamebox'); gb4.setAttribute('style', 'left:-100%;top:-200%;background:red;');
 zp.appendChild(gb4);
 
+var gb5 = document.createElement("div"); 
+gb5.setAttribute('class', 'gamebox'); gb5.setAttribute('style', 'left:-300%;top:-200%;background:yellow;');
+zp.appendChild(gb5);
+
+
+var gb6 = document.createElement("div"); 
+gb6.setAttribute('class', 'gamebox'); gb6.setAttribute('style', 'left:+200%;top:-200%;background:orange;');
+zp.appendChild(gb6);
+
+var gb7 = document.createElement("div"); 
+gb7.setAttribute('class', 'gamebox'); gb7.setAttribute('style', 'left:+300%;top:-200%;background:gray;');
+zp.appendChild(gb7);
+
+var gb8 = document.createElement("div"); 
+gb8.setAttribute('class', 'gamebox'); gb8.setAttribute('style', 'left:+400%;top:-300%;background:gray;');
+zp.appendChild(gb8);
+
 
 var boxes=document.querySelectorAll(".gamebox");
 for (var i=0;i<boxes.length;i++){
@@ -141,8 +171,16 @@ function resize(){
 
 var box=document.querySelector(".zeropoint");        
 
-var ww=window.innerWidth;
-var wh=window.innerHeight;
+//var ww=window.innerWidth;
+//var wh=window.innerHeight;
+
+//var ww=document.body.clientWidth;
+//var wh=document.body.clientHeight;
+
+var ww=window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+var wh=window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
+
+
 var wm=Math.min(ww,wh);
 const p=0.125;
 const maxw=100;
@@ -178,6 +216,7 @@ window.addEventListener("resize", function(){
 </script>
 </body>
 </html>
+
 
 
 
