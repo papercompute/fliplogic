@@ -180,7 +180,7 @@ for (var i=0;i<boxes.length;i++){
 
 if(checkBoxesColor()){
 console.log("Yooohoooooooooooooooooo!!!");
-levelUpdate(game.i+1);
+levelUpdate( (game.i+1) % game.l.length);
 }
 
 
@@ -230,7 +230,7 @@ for (var j=0;j<boxes.length;j++){
 }
 
 
-}, 0);
+}, 50);
 
 
 game.i=l;
