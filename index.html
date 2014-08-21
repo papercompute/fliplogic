@@ -48,6 +48,24 @@ min-height: 100px;
  font-size: 2em;
 }
 
+
+.infoshow{
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ transform: translate(-50%, -50%);
+ opacity: 0.5;
+}
+
+.infoshow h1{
+ font-size: 4em;
+}
+
+.infoshow-fx{
+ transition: font-size 1.3s;
+ moz-transition: font-size 1.3s;
+}
+
 .gamebox{
  position: absolute;
  top: 0%;
@@ -77,6 +95,11 @@ min-height: 100px;
   <div class="infobox" style="visibility:hidden;">
     <h1>Level complite!!!</h1>
   </div>
+
+  <div class="infoshow" style="visibility:hidden;">
+    <h1 style="text-align: center;">Click boxes make same color</h1>
+  </div>
+
 
 <script src="jquery-2.1.1.min.js"></script>
 
@@ -152,18 +175,19 @@ return false;
 }
 */
 
+
 function onclick(e){
-console.log(e.target.style.backgroundColor);
-console.log(e.target.style.left);
-console.log(e.target.style.top);
+//console.log(e.target.style.backgroundColor);
+//console.log(e.target.style.left);
+//console.log(e.target.style.top);
 
 //updateColor(e.target);
 
 var eleft=parseInt(e.target.style.left.slice(0, -1));
 var etop=parseInt(e.target.style.top.slice(0, -1));
 
-console.log(eleft);console.log(etop);
-
+//console.log(eleft);console.log(etop);
+//var positions=[];
 var boxes=document.querySelectorAll(".gamebox");
 for (var i=0;i<boxes.length;i++){
  var x=boxes[i];
@@ -175,12 +199,13 @@ for (var i=0;i<boxes.length;i++){
 //  updateColor(boxes[i]);
  //console.log(x,xleft,xtop,Math.abs(xleft - eleft),Math.abs(xtop - etop));
  updateColor(x);
+// positions.push([xleft,xtop])
  }
 }
 
 if(checkBoxesColor()){
 console.log("Yooohoooooooooooooooooo!!!");
-levelUpdate( (game.i+1) % game.l.length);
+levelUpdate( (game.i+1) % game.l.length );
 }
 
 
@@ -205,8 +230,10 @@ while (zp.firstChild) {
 for(var i=0;i<game.l[l].length;i++){
  var gb = document.createElement("div");
  gb.setAttribute('class', 'gamebox gamebox-fx');
- gb.setAttribute('gindex',i);
-// gb.setAttribute('style', 'left:'+(game.l[l][i][0]*100)+'%; top:'+(game.l[l][i][1]*100)+'%; background:'+game.l[l][i][2]+';');
+ gb.gindex=i;
+ if(game.l[l][i][3]!='undefined'){
+  gb.gmble=game.l[l][i][3];
+ }
  gb.setAttribute('style', 'background:'+game.l[l][i][2]+';');
 
  zp.appendChild(gb);
@@ -225,7 +252,7 @@ setTimeout(function() {
 
 var boxes=document.querySelectorAll(".gamebox");
 for (var j=0;j<boxes.length;j++){
-  var i=boxes[j].getAttribute('gindex');
+  var i=boxes[j].gindex;
   boxes[j].setAttribute('style','left:'+(game.l[l][i][0]*100)+'%; top:'+(game.l[l][i][1]*100)+'%; background:'+game.l[l][i][2]+';');
 }
 
@@ -234,6 +261,21 @@ for (var j=0;j<boxes.length;j++){
 
 
 game.i=l;
+
+}
+
+function infoShow(cb)
+{
+
+var is=document.querySelector(".infoshow");
+is.style.visibility="visible";
+
+setTimeout(function() {
+
+var is=document.querySelector(".infoshow");
+is.style.visibility="hidden";
+cb(game.i);
+}, 2250);
 
 }
 
@@ -353,7 +395,7 @@ return false;
 window.addEventListener("load", function () {
 console.log("load");
 resize();
-levelUpdate(0);
+infoShow(levelUpdate);
 });
 
 window.addEventListener("resize", function(){
