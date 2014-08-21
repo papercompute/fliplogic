@@ -1,4 +1,4 @@
 fliplogic
 =========
 
-fliplogic html5 game
+[fliplogic](http://papercompute.github.io/fliplogic/) html5 game
