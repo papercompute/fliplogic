@@ -1,6 +1,6 @@
 var game={
 l : [
-[
+[ // L0
  [-1,-1,"red",function(e){
    var i=e.gindex;  var otop=game.l[game.i][i][1]*100;  var etop=parseInt(e.style.top.slice(0, -1));
    if(otop == etop){ e.style.top = (etop-100)+"%"; }else{  e.style.top = (otop)+"%"; }
@@ -8,7 +8,7 @@ l : [
  [0,0,"orange"],
  [1,1,"yellow"],
 ],
-[
+[ // L1
  [0,0,"black"],
  [1,1,"gray"],
  [-1,-1,"blue"],
@@ -28,7 +28,7 @@ l : [
    if(oleft == eleft && otop == etop){ e.style.left = (eleft+100)+"%";  e.style.top = (etop+100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
 ],
-[
+[ // L2
  [-2,-4,"gray"],
  [-3,-3,"gray"],
  [-2,-2,"black"],
@@ -44,15 +44,20 @@ l : [
  [-1,3,"green"],
  [1,3,"green"],
 ],
-[
+[ // L3
+ [-2,-2,"red"],
+ [-2,-1,"red"],
+ [-1,-1,"blue"],
+ [-1,0,"black"],
+ [-1,1,"green"],
  [0,0,"red"],
  [0,1,"red"],
  [1,0,"blue"],
  [1,1,"black"],
- [-1,0,"green"],
+ [-1,-3,"green"],
  [0,-1,"orange"],
 ],
-[
+[ // L4
  [0,0,"red"],
  [0,-1,"red"],
  [0,1,"yellow"],
@@ -65,7 +70,7 @@ l : [
  [1,-3,"green"],
  [-1,-2,"orange"],
 ],
-[
+[ // L5
  [0,0,"red"],
  [0,1,"red"],
  [1,0,"yellow"],
@@ -77,7 +82,7 @@ l : [
  [1,-3,"green"],
  [-1,-2,"orange"],
 ],
-[
+[ // L6
  [2,2,"red"],
  [2,-1,"red"],
  [2,-2,"yellow"],
@@ -88,10 +93,105 @@ l : [
  [-1,-2,"orange"],
  [1,-3,"green"],
  [-1,-2,"orange"],
-]
+],
+[ // L7
+ [-3,-3,"magenta",function(e){
+   var i=e.gindex;  var oleft=game.l[game.i][i][0]*100; var otop=game.l[game.i][i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop-100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
+ }],
+ [-1,-3,"magenta"],
+ [ 1,-3,"magenta"],
+ [ 3,-3,"magenta",function(e){
+   var i=e.gindex;  var oleft=game.l[game.i][i][0]*100; var otop=game.l[game.i][i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   if(oleft == eleft && otop == etop){ e.style.left = (eleft+100)+"%";  e.style.top = (etop-100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
+ }],
+
+ [-2,-2,"blue"],
+ [ 0,-2,"blue"],
+ [ 2,-2,"blue"],
+
+ [-3,-1,"magenta"],
+ [-1,-1,"magenta"],
+ [ 1,-1,"magenta"],
+ [ 3,-1,"magenta"],
+
+ [-2, 0,"blue"],
+ [ 0, 0,"blue"],
+ [ 2, 0,"blue"],
+
+ [-3, 1,"magenta",function(e){
+   var i=e.gindex;  var oleft=game.l[game.i][i][0]*100; var otop=game.l[game.i][i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop+100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
+ }],
+ [-1, 1,"magenta"],
+ [ 1, 1,"magenta"],
+ [ 3, 1,"magenta",function(e){
+   var i=e.gindex;  var oleft=game.l[game.i][i][0]*100; var otop=game.l[game.i][i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   if(oleft == eleft && otop == etop){ e.style.left = (eleft+100)+"%";  e.style.top = (etop+100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
+ }],
+],
+[ // L8
+ [-3,-3,"magenta"],
+ [-2,-3,"blue"],
+ [-1,-3,"magenta"],
+ [ 0,-3,"blue"],
+ [ 1,-3,"magenta"],
+ [ 2,-3,"blue"],
+ [ 3,-3,"magenta"],
+
+ [-2,-2,"blue"],
+ [ 0,-2,"blue"],
+ [ 2,-2,"blue"],
+
+ [-3,-1,"magenta"],
+ [-2,-1,"blue"],
+ [-1,-1,"magenta"],
+ [ 0,-1,"blue"],
+ [ 1,-1,"magenta"],
+ [ 2,-1,"blue"],
+ [ 3,-1,"magenta"],
+
+ [-2, 0,"blue"],
+ [ 0, 0,"blue"],
+ [ 2, 0,"blue"],
+
+ [-3, 1,"magenta"],
+ [-2, 1,"blue"],
+ [-1, 1,"magenta"],
+ [ 0, 1,"blue"],
+ [ 1, 1,"magenta"],
+ [ 2, 1,"blue"],
+ [ 3, 1,"magenta"],
 
 ],
-i:2
+[ // L9
+ [-3,-3,"bisque"],
+ [-2,-4,"bisque"],
+ [-2,-2,"bisque"],
+ [-2,-3,"green"],
+ [-1,-3,"bisque"],
+
+ [1,-3,"green"],
+ [1,-2,"darkorange"],
+ [1,-1,"darkorange"],
+ [0,-2,"red"],
+ [2,-2,"bisque"],
+
+ [2,0,"green"],
+ [2,1,"darkorange"],
+ [2,2,"darkorange"],
+ [1,1,"red"],
+ [3,1,"bisque"],
+
+ [-1,1,"green"],
+ [-1,2,"darkorange"],
+ [-1,3,"darkorange"],
+ [-2,2,"red"],
+ [0,2,"bisque"],
+
+]
+],
+i:7
 };
 
 (function(){

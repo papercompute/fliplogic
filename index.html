@@ -158,7 +158,7 @@ return true;
 }
 
 function updateColor(e){
-
+//console.log("updateColor",e.style.backgroundColor);
 var ci=COLORS.indexOf(e.style.backgroundColor); 
 if(ci>=0){
  ci=(ci+1) % COLORS.length; 
@@ -221,19 +221,25 @@ for(var i=0;i<game.l[l].length;i++){
  gb.gcb=game.l[l][i][3];
  var color=game.l[l][i][2] || "black";
  gb.setAttribute('style', 'background:'+color+';');
-
+/*
  if( COLORS.indexOf(color) < 0 && color!="black") {
   COLORS.push(color);
  }
+*/
  zp.appendChild(gb);
 }
-
 
 var boxes=document.querySelectorAll(".gamebox");
 
 for (var j=0;j<boxes.length;j++){
   boxes[j].onclick=onclick;  
+  var color=boxes[j].style.backgroundColor;
+   if( COLORS.indexOf(color) < 0 && color!="black") {
+  COLORS.push(color);
+ }
 }
+
+//console.log("COLORS",COLORS);
 
 
 setTimeout(function() {
