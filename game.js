@@ -1,12 +1,12 @@
 var game={
 l : [
 [
- [-1,-1,"red"],
- [1,0,"orange"],
- [2,2,"yellow"],
-// [-1,1,"green"],
-// [1,-1,"blue"],
-// [-1,-2,"orange"]
+ [-1,-1,"red",function(e){
+   var i=e.gindex;  var otop=game.l[game.i][i][1]*100;  var etop=parseInt(e.style.top.slice(0, -1));
+   if(otop == etop){ e.style.top = (etop-100)+"%"; }else{  e.style.top = (otop)+"%"; }
+ }],
+ [0,0,"orange"],
+ [1,1,"yellow"],
 ],
 [
  [0,0,"black"],
@@ -29,15 +29,20 @@ l : [
  }],
 ],
 [
- [1,1,"yellow"],
- [-1,-1,"red"],
- [1,-2,"blue"],
- [-1,2,"black"],
- [1,3,"green"],
+ [-2,-4,"gray"],
+ [-3,-3,"gray"],
+ [-2,-2,"black"],
  [-1,-3,"orange"],
+ [-1,-1,"gray"],
+ [-2,4,"orange"],
+ [1,1,"green"],
+ [1,-2,"blue"],
+ [1,-4,"blue"],
+ [2,-3,"orange"],
+ [-2,2,"black"],
  [0,-3,"blue"],
- [-1,-2,"black"],
  [-1,3,"green"],
+ [1,3,"green"],
 ],
 [
  [0,0,"red"],
@@ -86,7 +91,7 @@ l : [
 ]
 
 ],
-i:1
+i:2
 };
 
 (function(){

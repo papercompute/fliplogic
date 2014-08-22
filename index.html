@@ -28,9 +28,6 @@ min-height: 100px;
  width:10%;
  height:10%;
  transform: translate(-50%, -50%);
-
-/* max-width: 100px;
- max-height: 100px; */
 }
 
 
@@ -39,9 +36,6 @@ min-height: 100px;
  left: 50%;
  top: 50%;
  transform: translate(-50%, -50%);
-/* background: orange;
- border: 3px solid #F10;
-*/
  opacity: 0.5;
 }
 
@@ -75,7 +69,6 @@ min-height: 100px;
  height:99%;
  background: green;
  border-radius: 5px;
-/* border: 1px solid #000;*/
 }
 
 .gamebox-fx{
@@ -89,7 +82,7 @@ min-height: 100px;
  left: 0px;
  top: 0px;
  width:100%;
- opacity: 0.5;
+ /*opacity: 0.5;*/
  font-size: 2em;
 }
 
@@ -107,6 +100,17 @@ min-height: 100px;
  font-size: 2em;
 }
 
+#idReset{
+ float:left;
+ padding:.25em;
+ text-decoration: none;
+}
+
+#idLevel{
+ float:right;
+ padding:.25em;
+ text-decoration: none;
+}
 
 </style>
 
@@ -117,21 +121,23 @@ min-height: 100px;
 -->
 <body>
   <div class="header">
-   <a id="idReset" href="#" style="float:left;">reset</a>
-   <a id="idLevel" href="#" style="float:right;">level</a>
+   <a id="idReset" href="#">R</a>
+   <a id="idLevel" href="#">L</a>
   </div>
+
+
   <div class="levels" style="visibility:hidden;">
   </div>
   <div class="zeropoint"></div>
+<!--
   <div class="infobox" style="visibility:hidden;">
     <h1>Level complite!!!</h1>
   </div>
+-->
   <div class="infoshow" style="visibility:hidden;">
-    <h1 style="text-align: center;">Click boxes make same color</h1>
+    <h1 style="text-align: center;">make boxes same color</h1>
   </div>
 
-
-<script src="jquery-2.1.1.min.js"></script>
 
 <script src="game.js"></script>
 
@@ -164,73 +170,20 @@ else{
 
 }
 
-/*
-function onmousedown(e){
-console.log("onmousedown:",e);
-
-}
-
-function onmouseup(e){
-console.log("onmouseup:",e);
-}
-*/
-
-/*
-
-var timer;
-var status = 1;
-
-function singleClick(event) {
- status = 1;
- timer = setTimeout(function() {
-  if (status == 1) {
-    console.log('single click !');
-    onclick(event);
-  }
- }, 250);
-}
-
-function doubleClick(event) {
- clearTimeout(timer);
- status = 0;
- console.log('double click !');
-}
-
-
-function ondblclick(e){
-console.log("ondblclick");
-console.log(e.target.style.backgroundColor);
-console.log(e.target.style.left);
-console.log(e.target.style.top);
-return false;
-}
-*/
-
 
 function onclick(e){
-//console.log(e.target.style.backgroundColor);
-//console.log(e.target.style.left);
-//console.log(e.target.style.top);
-
-//updateColor(e.target);
 
 var eleft=parseInt(e.target.style.left.slice(0, -1));
 var etop=parseInt(e.target.style.top.slice(0, -1));
 
-//console.log(eleft);console.log(etop);
-//var positions=[];
 var boxes=document.querySelectorAll(".gamebox");
 for (var i=0;i<boxes.length;i++){
  var x=boxes[i];
  if(x.style.backgroundColor == IMM_COLOR){continue;}
  var xleft=parseInt(x.style.left.slice(0, -1));
  var xtop=parseInt(x.style.top.slice(0, -1));
-// console.log(eleft); console.log(etop);
  if( Math.abs(xleft - eleft) <= 100 && Math.abs(xtop - etop) <= 100 ){
-//  updateColor(boxes[i]);
- //console.log(x,xleft,xtop,Math.abs(xleft - eleft),Math.abs(xtop - etop));
  updateColor(x);
-// positions.push([xleft,xtop])
  }
 }
 
@@ -264,11 +217,8 @@ for(var i=0;i<game.l[l].length;i++){
  var gb = document.createElement("div");
  gb.setAttribute('class', 'gamebox gamebox-fx');
  gb.gindex=i;
-// console.log('function',game.l[l][i][3]);
+
  gb.gcb=game.l[l][i][3];
- if(typeof gb.gcb!=="undefined"){
-  console.log(gb.gcb);
- }
  var color=game.l[l][i][2] || "black";
  gb.setAttribute('style', 'background:'+color+';');
 
@@ -278,11 +228,9 @@ for(var i=0;i<game.l[l].length;i++){
  zp.appendChild(gb);
 }
 
- console.log(COLORS);
-
 
 var boxes=document.querySelectorAll(".gamebox");
-console.log(boxes);
+
 for (var j=0;j<boxes.length;j++){
   boxes[j].onclick=onclick;  
 }
@@ -301,6 +249,9 @@ for (var j=0;j<boxes.length;j++){
 
 
 game.i=l;
+
+var idLevel=document.getElementById("idLevel");
+idLevel.innerHTML='L'+l;
 
 }
 
@@ -321,11 +272,12 @@ cb(game.i);
 
 
 function showLevels(){
-
+console.log("showLevels");
 var zp=document.querySelector(".zeropoint");
 while (zp.firstChild) {  zp.removeChild(zp.firstChild); }
 
 var lvls=document.querySelector(".levels");
+console.log(lvls);
 lvls.style.visibility="visible";
 }
 
@@ -337,69 +289,13 @@ lvls.style.visibility="hidden";
 
 
 
-(function(){
-
-//levelUpdate(0);
-/*
-
-var gb1 = document.createElement("div"); 
-gb1.setAttribute('class', 'gamebox'); gb1.setAttribute('style', 'left:0%;top:0%;background:red;');
-zp.appendChild(gb1);
-
-var gb2 = document.createElement("div"); 
-gb2.setAttribute('class', 'gamebox'); gb2.setAttribute('style', 'left:100%;top:100%;background:orange;');
-zp.appendChild(gb2);
-
-var gb3 = document.createElement("div"); 
-gb3.setAttribute('class', 'gamebox'); gb3.setAttribute('style', 'left:-100%;top:-100%;background:blue;');
-zp.appendChild(gb3);
-
-*/
-/*
-var gb4 = document.createElement("div"); 
-gb4.setAttribute('class', 'gamebox'); gb4.setAttribute('style', 'left:-100%;top:-200%;background:red;');
-zp.appendChild(gb4);
-
-var gb5 = document.createElement("div"); 
-gb5.setAttribute('class', 'gamebox'); gb5.setAttribute('style', 'left:-200%;top:-200%;background:yellow;');
-zp.appendChild(gb5);
-
-
-var gb6 = document.createElement("div"); 
-gb6.setAttribute('class', 'gamebox'); gb6.setAttribute('style', 'left:+200%;top:-200%;background:orange;');
-zp.appendChild(gb6);
-
-var gb7 = document.createElement("div"); 
-gb7.setAttribute('class', 'gamebox'); gb7.setAttribute('style', 'left:+300%;top:-200%;background:gray;');
-zp.appendChild(gb7);
-
-var gb8 = document.createElement("div"); 
-gb8.setAttribute('class', 'gamebox'); gb8.setAttribute('style', 'left:+300%;top:-300%;background:gray;');
-zp.appendChild(gb8);
-
-var gb9 = document.createElement("div"); 
-gb9.setAttribute('class', 'gamebox'); gb9.setAttribute('style', 'left:-300%;top:-300%;background:orange;');
-zp.appendChild(gb9);
-
-
-var gb10 = document.createElement("div"); 
-gb10.setAttribute('class', 'gamebox'); gb10.setAttribute('style', 'left:100%;top:-100%;background:red;');
-zp.appendChild(gb10);
-*/
-
-
-}());
+(function(){}());
 
 function resize(){
  console.log('resize!')
 
 var box=document.querySelector(".zeropoint");
 
-//var ww=window.innerWidth;
-//var wh=window.innerHeight;
-
-//var ww=document.body.clientWidth;
-//var wh=document.body.clientHeight;
 
 var ww=window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 var wh=window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
@@ -417,48 +313,17 @@ console.log(nw);console.log(nh);
 box.style.width=nw+"px";box.style.height=nh+"px";
 }
 
-/*
-document.body.addEventListener("keydown", function (e) {
-console.log("keydown");
-});
-
-document.body.addEventListener("keyup", function (e) {
-console.log("keyup");
-});
-*/
-/*
-document.body.addEventListener("mousedown", function (e) {
-console.log("mousedown");
-});
-
-document.body.addEventListener("mouseup", function (e) {
-console.log("mouseup");
-});
-*/
-/*
-window.addEventListener("mousedown", function (e) {
-console.log("mousedown");
-console.log(e.target);
-return false;
-});
-
-window.addEventListener("mouseup", function (e) {
-console.log("mouseup");
-console.log(e.target);
-return false;
-});
-*/
 window.addEventListener("load", function () {
 console.log("load");
 
 var idReset=document.getElementById("idReset");
 idReset.onclick=function(){
-//console.log("idReset.onclick");
+console.log("idReset.onclick");
 levelUpdate( game.i );
 };
-var idLevel=document.getElementById("idLevel");                
+var idLevel=document.getElementById("idLevel");
 idLevel.onclick=function(){
-//console.log("idLevel.onclick");
+console.log("idLevel.onclick");
 showLevels();
 };
 
@@ -466,45 +331,19 @@ showLevels();
 var levels=document.querySelector(".levels");
 for(var i=0;i<game.l.length;i++){
  var e = document.createElement("a");
-// e.setAttribute('class', 'gamebox gamebox-fx');
  e.setAttribute('href', '#');
- e.innerText=" "+i;
+ e.innerHTML=" "+i;
+ e.style.textDecoration="none";
 
  e.onclick=function(e){
-  console.log(e.target);
-  var l=parseInt(e.target.innerText);
+  console.log("onclick",e.target);
+  var l=parseInt(e.target.innerHTML);
   if(l>=0 && l<game.l.length){ levelUpdate( l );}
   hideLevels();
  }
 
  levels.appendChild(e);
 }
-/*
-var levels=document.querySelectorAll(".levels a");
-console.log(levels);
-for(var i=0;i<levels.length;i++){
-var node=levels[i];
-console.log(node);
-node.onclick=function(e){
- console.log(e.target);
- var l=parseInt(e.target.innerText);
- if(l>=0 && l<game.l.length){ levelUpdate( l );}
- hideLevels();
-}
-
-}
-*/
-/*
-for(var i=0;i<levels.childNodes.length;i++){
-var node=levels.childNodes[i];
-console.log(node);
-node.onclick=function(e){
- var l=parseInt(e.innerText);
- if(l>=0 && l<game.l.length){ levelUpdate( l );}
-}
-
-};
-*/
 resize();
 infoShow(levelUpdate);
 });
