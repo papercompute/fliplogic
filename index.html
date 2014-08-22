@@ -29,9 +29,10 @@ min-height: 100px;
  height:10%;
  transform: translate(-50%, -50%);
 
- max-width: 100px;
- max-height: 100px; 
+/* max-width: 100px;
+ max-height: 100px; */
 }
+
 
 .infobox{
  position: absolute;
@@ -82,6 +83,31 @@ min-height: 100px;
  moz-transition: left 1.3s, top 1.3s;
 }
 
+
+.header{
+ position: absolute;
+ left: 0px;
+ top: 0px;
+ width:100%;
+ opacity: 0.5;
+ font-size: 2em;
+}
+
+.levels{
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ transform: translate(-50%, -50%);
+ opacity: 0.5;
+ font-size: 2em;
+ z-index: 100;
+}
+
+.levels a{
+ font-size: 2em;
+}
+
+
 </style>
 
 </head>
@@ -90,12 +116,16 @@ min-height: 100px;
 <body ondragstart="return false;" ondrop="return false;">
 -->
 <body>
+  <div class="header">
+   <a id="idReset" href="#" style="float:left;">reset</a>
+   <a id="idLevel" href="#" style="float:right;">level</a>
+  </div>
+  <div class="levels" style="visibility:hidden;">
+  </div>
   <div class="zeropoint"></div>
-
   <div class="infobox" style="visibility:hidden;">
     <h1>Level complite!!!</h1>
   </div>
-
   <div class="infoshow" style="visibility:hidden;">
     <h1 style="text-align: center;">Click boxes make same color</h1>
   </div>
@@ -107,14 +137,15 @@ min-height: 100px;
 
 <script>
 
-const COLORS = ["orange","gray","blue"];
+var COLORS = ["orange","gray","blue"];
 const IMM_COLOR = "black";
 
 function checkBoxesColor(){
 var boxes=document.querySelectorAll(".gamebox");
-var color = boxes[0].style.backgroundColor;
-for (var i=1;i<boxes.length;i++){
+var color="";
+for (var i=0;i<boxes.length;i++){
  if( boxes[i].style.backgroundColor == IMM_COLOR ) {continue;}
+ if( color == ""){color=boxes[i].style.backgroundColor;continue;}
  if( boxes[i].style.backgroundColor != color ) {return false;}
 }
 return true;
@@ -203,6 +234,10 @@ for (var i=0;i<boxes.length;i++){
  }
 }
 
+if(typeof e.target.gcb!=="undefined"){
+ e.target.gcb(e.target);
+}
+
 if(checkBoxesColor()){
 console.log("Yooohoooooooooooooooooo!!!");
 levelUpdate( (game.i+1) % game.l.length );
@@ -220,25 +255,30 @@ if(l>=game.l.length || l<0){ console.log("wrong level",l);return;}
 
 var zp=document.querySelector(".zeropoint");
 
+while (zp.firstChild) {  zp.removeChild(zp.firstChild); }
 
-//zp.innerText = '';
 
-while (zp.firstChild) {
-    zp.removeChild(zp.firstChild);
-}
+COLORS.length = 0;
 
 for(var i=0;i<game.l[l].length;i++){
  var gb = document.createElement("div");
  gb.setAttribute('class', 'gamebox gamebox-fx');
  gb.gindex=i;
- if(game.l[l][i][3]!='undefined'){
-  gb.gmble=game.l[l][i][3];
+// console.log('function',game.l[l][i][3]);
+ gb.gcb=game.l[l][i][3];
+ if(typeof gb.gcb!=="undefined"){
+  console.log(gb.gcb);
  }
- gb.setAttribute('style', 'background:'+game.l[l][i][2]+';');
+ var color=game.l[l][i][2] || "black";
+ gb.setAttribute('style', 'background:'+color+';');
 
+ if( COLORS.indexOf(color) < 0 && color!="black") {
+  COLORS.push(color);
+ }
  zp.appendChild(gb);
 }
 
+ console.log(COLORS);
 
 
 var boxes=document.querySelectorAll(".gamebox");
@@ -278,6 +318,23 @@ cb(game.i);
 }, 2250);
 
 }
+
+
+function showLevels(){
+
+var zp=document.querySelector(".zeropoint");
+while (zp.firstChild) {  zp.removeChild(zp.firstChild); }
+
+var lvls=document.querySelector(".levels");
+lvls.style.visibility="visible";
+}
+
+
+function hideLevels(){
+var lvls=document.querySelector(".levels");
+lvls.style.visibility="hidden";
+}
+
 
 
 (function(){
@@ -336,7 +393,7 @@ zp.appendChild(gb10);
 function resize(){
  console.log('resize!')
 
-var box=document.querySelector(".zeropoint");        
+var box=document.querySelector(".zeropoint");
 
 //var ww=window.innerWidth;
 //var wh=window.innerHeight;
@@ -357,8 +414,7 @@ console.log(wh);
 var nw=Math.round(wm*p);if(nw>maxw){nw=maxw;}
 var nh=Math.round(wm*p);if(nh>maxh){nh=maxh;}
 console.log(nw);console.log(nh);
-box.style.width=nw+"px";
-box.style.height=nh+"px";
+box.style.width=nw+"px";box.style.height=nh+"px";
 }
 
 /*
@@ -379,7 +435,7 @@ document.body.addEventListener("mouseup", function (e) {
 console.log("mouseup");
 });
 */
-
+/*
 window.addEventListener("mousedown", function (e) {
 console.log("mousedown");
 console.log(e.target);
@@ -391,9 +447,64 @@ console.log("mouseup");
 console.log(e.target);
 return false;
 });
-
+*/
 window.addEventListener("load", function () {
 console.log("load");
+
+var idReset=document.getElementById("idReset");
+idReset.onclick=function(){
+//console.log("idReset.onclick");
+levelUpdate( game.i );
+};
+var idLevel=document.getElementById("idLevel");                
+idLevel.onclick=function(){
+//console.log("idLevel.onclick");
+showLevels();
+};
+
+
+var levels=document.querySelector(".levels");
+for(var i=0;i<game.l.length;i++){
+ var e = document.createElement("a");
+// e.setAttribute('class', 'gamebox gamebox-fx');
+ e.setAttribute('href', '#');
+ e.innerText=" "+i;
+
+ e.onclick=function(e){
+  console.log(e.target);
+  var l=parseInt(e.target.innerText);
+  if(l>=0 && l<game.l.length){ levelUpdate( l );}
+  hideLevels();
+ }
+
+ levels.appendChild(e);
+}
+/*
+var levels=document.querySelectorAll(".levels a");
+console.log(levels);
+for(var i=0;i<levels.length;i++){
+var node=levels[i];
+console.log(node);
+node.onclick=function(e){
+ console.log(e.target);
+ var l=parseInt(e.target.innerText);
+ if(l>=0 && l<game.l.length){ levelUpdate( l );}
+ hideLevels();
+}
+
+}
+*/
+/*
+for(var i=0;i<levels.childNodes.length;i++){
+var node=levels.childNodes[i];
+console.log(node);
+node.onclick=function(e){
+ var l=parseInt(e.innerText);
+ if(l>=0 && l<game.l.length){ levelUpdate( l );}
+}
+
+};
+*/
 resize();
 infoShow(levelUpdate);
 });
