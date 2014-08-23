@@ -124,37 +124,37 @@ l : [
  [-1,-2,"orange"],
 ],
 [ // L7
- [-3,-3,"magenta",function(e){
+ [-3,-2,"magenta",function(e){
    var i=e.gindex;  var oleft=game.l[game.i][i][0]*100; var otop=game.l[game.i][i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop-100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
- [-1,-3,"magenta"],
- [ 1,-3,"magenta"],
- [ 3,-3,"magenta",function(e){
+ [-1,-2,"magenta"],
+ [ 1,-2,"magenta"],
+ [ 3,-2,"magenta",function(e){
    var i=e.gindex;  var oleft=game.l[game.i][i][0]*100; var otop=game.l[game.i][i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft+100)+"%";  e.style.top = (etop-100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
 
- [-2,-2,"blue"],
- [ 0,-2,"blue"],
- [ 2,-2,"blue"],
+ [-2,-1,"blue"],
+ [ 0,-1,"blue"],
+ [ 2,-1,"blue"],
 
- [-3,-1,"magenta"],
- [-1,-1,"magenta"],
- [ 1,-1,"magenta"],
- [ 3,-1,"magenta"],
+ [-3,-0,"magenta"],
+ [-1,-0,"magenta"],
+ [ 1,-0,"magenta"],
+ [ 3,-0,"magenta"],
 
- [-2, 0,"blue"],
- [ 0, 0,"blue"],
- [ 2, 0,"blue"],
+ [-2, 1,"blue"],
+ [ 0, 1,"blue"],
+ [ 2, 1,"blue"],
 
- [-3, 1,"magenta",function(e){
+ [-3, 2,"magenta",function(e){
    var i=e.gindex;  var oleft=game.l[game.i][i][0]*100; var otop=game.l[game.i][i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop+100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
- [-1, 1,"magenta"],
- [ 1, 1,"magenta"],
- [ 3, 1,"magenta",function(e){
+ [-1, 2,"magenta"],
+ [ 1, 2,"magenta"],
+ [ 3, 2,"magenta",function(e){
    var i=e.gindex;  var oleft=game.l[game.i][i][0]*100; var otop=game.l[game.i][i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft+100)+"%";  e.style.top = (etop+100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
