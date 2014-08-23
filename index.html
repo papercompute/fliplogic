@@ -47,7 +47,7 @@ min-height: 100px;
 .infoshow{
  position: absolute;
  left: 50%;
- top: 50%;
+ top: 10%;
  transform: translate(-50%, -50%);
  opacity: 0.5;
 }
@@ -125,15 +125,10 @@ min-height: 100px;
    <a id="idLevel" href="#">L</a>
   </div>
 
-
   <div class="levels" style="visibility:hidden;">
   </div>
   <div class="zeropoint"></div>
-<!--
-  <div class="infobox" style="visibility:hidden;">
-    <h1>Level complite!!!</h1>
-  </div>
--->
+
   <div class="infoshow" style="visibility:hidden;">
     <h1 style="text-align: center;">make boxes same color</h1>
   </div>
@@ -193,8 +188,19 @@ if(typeof e.target.gcb!=="undefined"){
 
 if(checkBoxesColor()){
 console.log("Yooohoooooooooooooooooo!!!");
-levelUpdate( (game.i+1) % game.l.length );
-}
+
+var is=document.querySelector(".infoshow");
+var ish1=document.querySelector(".infoshow h1");
+ish1.innerHTML="Level "+game.i+" complite!";
+is.style.visibility="visible";
+
+setTimeout(function() {
+ var is=document.querySelector(".infoshow");
+ is.style.visibility="hidden";
+ levelUpdate( (game.i+1) % game.l.length );
+}, 2250);
+
+} // if
 
 
 }
