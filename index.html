@@ -23,10 +23,10 @@ min-height: 100px;
 
 .zeropoint{
  position: absolute;
- left: 44%;
- top: 44%;
- width:12.5%;
- height:12.5%;
+ left: 44.5%;
+ top: 42%;
+ width:12.25%;
+ height:12.25%;
 /* transform: translate(-50%, -50%);*/
 }
 
@@ -35,10 +35,10 @@ min-height: 100px;
  position: absolute;
  margin: auto;
  width: 70%;
- top: 90%; left: 0; bottom: 0; right: 0;
+ top: 85%; left: 0; bottom: 0; right: 0;
 /* transform: translate(-50%, -50%);*/
  opacity: 0.5;
-/* text-align:justify;*/
+ text-align:center;
 }
 
 .infobox h1{
@@ -100,7 +100,7 @@ min-height: 100px;
 
 .levels{
  position: absolute;
- margin: 10% auto;
+ margin: 15% auto;
 /* overflow: auto;*/
  width: 70%;
 /* height: 50%;*/
@@ -113,12 +113,23 @@ min-height: 100px;
  transform: translate(-50%, -50%);
  opacity: 0.5;
 */
+ text-align: center;
  font-size: 2em;
  z-index: 100;
 }
 
 .levels a{
  font-size: 2em;
+}
+
+.fliplogic{
+ position: absolute;
+ margin: 0 auto;
+ top: 0; left: 0; bottom: 0; right: 0; 
+ opacity: 0.5;
+ text-align: center;
+ width:50%;
+/* background-color: lightgray;*/
 }
 
 #idReset{
@@ -141,18 +152,25 @@ min-height: 100px;
 <body ondragstart="return false;" ondrop="return false;">
 -->
 <body>
+  <div class="fliplogic">
+    <p style="font-size:2em;margin-top:5px;"> <strong><span style="color:blue;">f</span><span style="color:red;">l</span><span style="color:orange;">i</span><span style="color:gray;">p</span><span style="color:black;">l</span><span style="color:blue;">o</span><span style="color:green;">g</span><span style="color:magenta;">i</span><span style="color:blue;">c</span></strong>   </p>
+  </div>
   <div class="header">
    <a id="idReset" href="#">R</a>
    <a id="idLevel" href="#">L</a>
   </div>
   <div class="infobox">
-    <p> <strong>How to play</strong>: Click boxes to change colors. One click changes color of clicked box and close neigbours. <br>Some boxes moves. Black boxes never change color. </p>
-    <p> <strong>Objective</strong>: Make all boxes same color, except black.  </p>
-    <p> <strong>R</strong> (left top) reset level. <strong>L</strong> (right top) choose level.  </p>
+
+    <p> <strong>How to play</strong>: <br>Click boxes to change colors. <br>One click changes color of clicked box and close neigbours. <br>Some boxes are moved by click. <br>Black boxes never change color. </p>
+    <p> <strong>Objective</strong>: <br>Make all boxes same color, except black.  </p>
+    <p> <strong>R</strong> (left top) reset level.</p> 
+    <p> <strong>L</strong> (right top) choose level.  </p>
+    <p> <strong>Tip</strong>: <br>Find symmetry.  </p>
+
   </div>
 
   <div class="infoshow" style="visibility:hidden;">
-    <h1 style="text-align: center;">make boxes <br>same color</h1>
+    <h1 style="text-align: center;"></h1>
   </div>
 
   <div class="levels" style="visibility:hidden;">
@@ -384,7 +402,8 @@ for(var i=0;i<game.l.length;i++){
  levels.appendChild(e);
 }
 resize();
-infoShow(levelUpdate);
+//infoShow(levelUpdate);
+levelUpdate(game.i);
 });
 
 window.addEventListener("resize", function(){
