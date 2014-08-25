@@ -162,9 +162,13 @@ l : [
 [ // L6
  ["scale",0.1],
  [-1,-4,"lightgray"],
- [-3,-3,"red"],
+ [-3,-3,"red",function(e){
+   var i=e.gindex;  var oleft=game.l[game.i][i][0]*100; var otop=game.l[game.i][i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop-100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
+ }],
  [-2,-3,"lightgray"],
  [-1,-3,"lightgray"],
+ [ 0,-3,"lightgray"],
 
  [-3,-2,"lightgray"],
  [-2,-2,"lightgray"],
@@ -201,6 +205,7 @@ l : [
 
 ],
 [ // L7
+ ["scale",0.09],
  [-3,-2,"magenta",function(e){
    var i=e.gindex;  var oleft=game.l[game.i][i][0]*100; var otop=game.l[game.i][i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop-100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
