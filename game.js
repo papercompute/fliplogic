@@ -58,6 +58,7 @@ l : [
  [1,-2,"blue"],
  [1,-4,"blue"],
  [2,-3,"orange"],
+ [3	,-2,"orange"],
 
  [-1,-1,"gray"],
  [0,-1,"gray"],
@@ -93,41 +94,111 @@ l : [
  [0,-1,"orange"],
 ],
 [ // L4
- [0,0,"red"],
- [0,-1,"red"],
- [0,1,"yellow"],
- [-1,-3,"black"],
- [1,-2,"blue"],
- [-1,-2,"black"],
- [1,-3,"green"],
- [-1,-2,"orange"],
- [-1,-2,"black"],
- [1,-3,"green"],
- [-1,-2,"orange"],
+ [-2,-2,"red"],
+ [-1,-1,"red"],
+ [ 0, 0,"red"],
+ [ 1,-1,"red"],
+ [ 2,-2,"red"],
+
+ [-2, 1,"red"],
+ [-1, 2,"red"],
+ [ 0, 3,"red"],
+ [ 1, 2,"red"],
+ [ 2, 1,"red"],
+
+ [-3,-1,"lightgray"],
+ [-3, 0,"lightgray"],
+
+ [ 3,-1,"lightgray"],
+ [ 3, 0,"lightgray"],
+
 ],
 [ // L5
- [0,0,"red"],
- [0,1,"red"],
- [1,0,"yellow"],
- [1,1,"black"],
- [1,2,"blue"],
- [2,1,"black"],
- [2,2,"green"],
- [-1,-2,"orange"],
- [1,-3,"green"],
- [-1,-2,"orange"],
+ ["scale",0.1],
+ [-3,-3,"lightgray"],
+ [-2,-3,"lightgray"],
+ [-1,-3,"lightgray"],
+
+ [-3,-2,"lightgray"],
+ [-1,-2,"lightgray"],
+ [-4,-2,"red"],
+
+ [-3,-1,"lightgray"],
+ [-2,-1,"lightgray"],
+ [-1,-1,"lightgray"],
+
+ [-3, 0,"lightgray"],
+ [-2, 0,"lightgray"],
+ [-1, 0,"lightgray"],
+ [ 0, 0,"lightgray"],
+
+
+ [-3, 1,"lightgray"],
+ [-2, 1,"lightgray"],
+ [-1, 1,"lightgray"],
+ [ 0, 1,"lightgray"],
+ [ 1, 1,"lightgray"],
+ [ 2, 1,"lightgray"],
+ [ 3, 1,"lightgray"],
+
+ [-3, 2,"lightgray"],
+ [-2, 2,"lightgray"],
+ [-1, 2,"lightgray"],
+ [ 0, 2,"lightgray"],
+ [ 1, 2,"lightgray"],
+ [ 2, 2,"lightgray"],
+
+
+ [-3, 3,"lightgray"],
+ [-2, 3,"lightgray"],
+ [-1, 3,"lightgray"],
+ [ 0, 3,"lightgray"],
+ [ 1, 3,"black"],
+
+ [ -2, 4,"lightgray"],
+
+
 ],
 [ // L6
- [2,2,"red"],
- [2,-1,"red"],
- [2,-2,"yellow"],
- [-3,1,"black"],
- [-1,2,"blue"],
- [-3,-3,"black"],
- [-2,-2,"green"],
- [-1,-2,"orange"],
- [1,-3,"green"],
- [-1,-2,"orange"],
+ ["scale",0.1],
+ [-1,-4,"lightgray"],
+ [-3,-3,"red"],
+ [-2,-3,"lightgray"],
+ [-1,-3,"lightgray"],
+
+ [-3,-2,"lightgray"],
+ [-2,-2,"lightgray"],
+ [-1,-2,"lightgray"],
+
+ [-1,-1,"lightgray"],
+ [ 0,-1,"lightgray"],
+ [ 1,-1,"lightgray"],
+ [ 2,-1,"lightgray"],
+ [ 3,-1,"lightgray"],
+ [ 4,-2,"lightgray"],
+ [ 4,-1,"black"],
+
+ [-1, 0,"lightgray"],
+ [ 0, 0,"lightgray"],
+ [ 1, 0,"lightgray"],
+ [ 2, 0,"lightgray"],
+ [ 3, 0,"lightgray"],
+
+ [-1, 1,"lightgray"],
+ [ 0, 1,"lightgray"],
+ [ 1, 1,"lightgray"],
+ [ 2, 1,"lightgray"],
+ [ 3, 1,"lightgray"],
+
+ [-1, 2,"lightgray"],
+ [ 3, 2,"lightgray"],
+
+ [-2, 3,"lightgray"],
+ [-1, 3,"lightgray"],
+ [ 2, 3,"lightgray"],
+ [ 3, 3,"lightgray"],
+
+
 ],
 [ // L7
  [-3,-2,"magenta",function(e){
@@ -226,7 +297,7 @@ l : [
 
 ]
 ],
-i:0
+i:6
 };
 
 (function(){

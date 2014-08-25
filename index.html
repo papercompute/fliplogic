@@ -25,9 +25,12 @@ min-height: 100px;
  position: absolute;
  left: 44.5%;
  top: 42%;
- width:12.25%;
- height:12.25%;
+ width:12.5%;
+ height:12.5%;
+ 
 /* transform: translate(-50%, -50%);*/
+ background-color: none;
+/* z-index:1000;*/
 }
 
 
@@ -35,7 +38,7 @@ min-height: 100px;
  position: absolute;
  margin: auto;
  width: 70%;
- top: 85%; left: 0; bottom: 0; right: 0;
+ top: 95%; left: 0; bottom: 0; right: 0;
 /* transform: translate(-50%, -50%);*/
  opacity: 0.5;
  text-align:center;
@@ -77,8 +80,8 @@ min-height: 100px;
  position: absolute;
  top: 0%;
  left: 0%;
- width:99%;
- height:99%;
+ width:97.5%;
+ height:97.5%;
  background: green;
  border-radius: 5px;
 }
@@ -196,6 +199,8 @@ min-height: 100px;
 
 var COLORS = ["orange","gray","blue"];
 const IMM_COLOR = "black";
+const DEFSCALE = 0.125
+var GSCALE = DEFSCALE;
 
 function checkBoxesColor(){
 var boxes=document.querySelectorAll(".gamebox");
@@ -228,6 +233,7 @@ var eleft=parseInt(e.target.style.left.slice(0, -1));
 var etop=parseInt(e.target.style.top.slice(0, -1));
 
 var boxes=document.querySelectorAll(".gamebox");
+
 for (var i=0;i<boxes.length;i++){
  var x=boxes[i];
  if(x.style.backgroundColor == IMM_COLOR){continue;}
@@ -274,8 +280,13 @@ while (zp.firstChild) {  zp.removeChild(zp.firstChild); }
 
 
 COLORS.length = 0;
+var scale=DEFSCALE;
 
 for(var i=0;i<game.l[l].length;i++){
+ if(typeof game.l[l][i][0] == "string" && game.l[l][i][0] == "scale"){ 
+  scale=game.l[l][i][1]; 
+  continue;
+ }
  var gb = document.createElement("div");
  gb.setAttribute('class', 'gamebox gamebox-fx');
  gb.gindex=i;
@@ -289,6 +300,11 @@ for(var i=0;i<game.l[l].length;i++){
  }
 */
  zp.appendChild(gb);
+}
+
+if(scale!=GSCALE){
+ GSCALE=scale;
+ resize();
 }
 
 var boxes=document.querySelectorAll(".gamebox");
@@ -370,7 +386,7 @@ var wh=window.innerHeight || document.documentElement.clientHeight || document.b
 
 
 var wm=Math.min(ww,wh);
-const p=0.125;
+var p=GSCALE || 0.125;
 const maxw=100;
 const maxh=100;
 console.log(ww);
