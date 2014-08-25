@@ -1,4 +1,4 @@
-fliplogic
+fliplogic puzzle game
 =========
 
-[fliplogic](http://papercompute.github.io/fliplogic/) html5 game
+Play online [fliplogic](http://papercompute.github.io/fliplogic/)
