@@ -23,11 +23,14 @@ min-height: 100px;
 
 .zeropoint{
  position: absolute;
- left: 44%;
- top: 44%;
+ left: 44.5%;
+ top: 42%;
  width:12.5%;
  height:12.5%;
+ 
 /* transform: translate(-50%, -50%);*/
+ background-color: none;
+/* z-index:1000;*/
 }
 
 
@@ -35,10 +38,10 @@ min-height: 100px;
  position: absolute;
  margin: auto;
  width: 70%;
- top: 90%; left: 0; bottom: 0; right: 0;
+ top: 95%; left: 0; bottom: 0; right: 0;
 /* transform: translate(-50%, -50%);*/
  opacity: 0.5;
-/* text-align:justify;*/
+ text-align:center;
 }
 
 .infobox h1{
@@ -77,8 +80,8 @@ min-height: 100px;
  position: absolute;
  top: 0%;
  left: 0%;
- width:99%;
- height:99%;
+ width:97.5%;
+ height:97.5%;
  background: green;
  border-radius: 5px;
 }
@@ -100,7 +103,7 @@ min-height: 100px;
 
 .levels{
  position: absolute;
- margin: 10% auto;
+ margin: 15% auto;
 /* overflow: auto;*/
  width: 70%;
 /* height: 50%;*/
@@ -113,12 +116,23 @@ min-height: 100px;
  transform: translate(-50%, -50%);
  opacity: 0.5;
 */
+ text-align: center;
  font-size: 2em;
  z-index: 100;
 }
 
 .levels a{
  font-size: 2em;
+}
+
+.fliplogic{
+ position: absolute;
+ margin: 0 auto;
+ top: 0; left: 0; bottom: 0; right: 0; 
+ opacity: 0.5;
+ text-align: center;
+ width:50%;
+/* background-color: lightgray;*/
 }
 
 #idReset{
@@ -141,18 +155,36 @@ min-height: 100px;
 <body ondragstart="return false;" ondrop="return false;">
 -->
 <body>
+  <div class="fliplogic">
+  </div>
   <div class="header">
    <a id="idReset" href="#">R</a>
    <a id="idLevel" href="#">L</a>
   </div>
   <div class="infobox">
-    <p> <strong>How to play</strong>: Click boxes to change colors. One click changes color of clicked box and close neigbours. <br>Some boxes moves. Black boxes never change color. </p>
-    <p> <strong>Objective</strong>: Make all boxes same color, except black.  </p>
-    <p> <strong>R</strong> (left top) reset level. <strong>L</strong> (right top) choose level.  </p>
+
+    <p> <strong>How to play</strong>: <br>Click boxes to change colors. <br>One click changes color of clicked box and close neigbours. <br>Some boxes are moved by click. <br>Black boxes never change color. </p>
+    <p> <strong>Objective</strong>: <br>Make all boxes same color, except black.  </p>
+    <p> <strong>R</strong> (left top) <a href="javascript:levelUpdate( game.i );">reset level</a>.</p> 
+    <p> <strong>L</strong> (right top) <a href="javascript:showLevels();window.scrollTo(0,0);">choose level</a>.</p>
+    <p> <strong>Tip</strong>: <br>Find symmetry.  </p>
+    <p>
+    <a href="https://github.com/papercompute/fliplogic" style="font-size:2em;"> <strong><span style="color:blue;">f</span><span style="color:red;">l</span><span style="color:orange;">i</span><span style="color:gray;">p</span><span style="color:black;">l</span><span style="color:blue;">o</span><span style="color:green;">g</span><span style="color:magenta;">i</span><span style="color:blue;">c</span></strong> </a>
+    </p>
+    <p>
+  <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out #fliplogic a #puzzle #game" data-via="papercompute" data-url="http://papercompute.github.io/fliplogic" data-counturl="https://github.com/papercompute/fliplogic">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+    </p>
+    <p>
+      Created by <a href="mailto:papercompute@gmail.com?subject=fliplogic">papercompute</a><br>      
+      Inspired by <a href="http://gabrielecirulli.github.io/2048/">2048</a> and other puzzle games.
+    </p>
+
   </div>
 
   <div class="infoshow" style="visibility:hidden;">
-    <h1 style="text-align: center;">make boxes <br>same color</h1>
+    <h1 style="text-align: center;"></h1>
   </div>
 
   <div class="levels" style="visibility:hidden;">
@@ -167,6 +199,8 @@ min-height: 100px;
 
 var COLORS = ["orange","gray","blue"];
 const IMM_COLOR = "black";
+const DEFSCALE = 0.125
+var GSCALE = DEFSCALE;
 
 function checkBoxesColor(){
 var boxes=document.querySelectorAll(".gamebox");
@@ -199,6 +233,7 @@ var eleft=parseInt(e.target.style.left.slice(0, -1));
 var etop=parseInt(e.target.style.top.slice(0, -1));
 
 var boxes=document.querySelectorAll(".gamebox");
+
 for (var i=0;i<boxes.length;i++){
  var x=boxes[i];
  if(x.style.backgroundColor == IMM_COLOR){continue;}
@@ -245,8 +280,13 @@ while (zp.firstChild) {  zp.removeChild(zp.firstChild); }
 
 
 COLORS.length = 0;
+var scale=DEFSCALE;
 
 for(var i=0;i<game.l[l].length;i++){
+ if(typeof game.l[l][i][0] == "string" && game.l[l][i][0] == "scale"){ 
+  scale=game.l[l][i][1]; 
+  continue;
+ }
  var gb = document.createElement("div");
  gb.setAttribute('class', 'gamebox gamebox-fx');
  gb.gindex=i;
@@ -260,6 +300,11 @@ for(var i=0;i<game.l[l].length;i++){
  }
 */
  zp.appendChild(gb);
+}
+
+if(scale!=GSCALE){
+ GSCALE=scale;
+ resize();
 }
 
 var boxes=document.querySelectorAll(".gamebox");
@@ -341,7 +386,7 @@ var wh=window.innerHeight || document.documentElement.clientHeight || document.b
 
 
 var wm=Math.min(ww,wh);
-const p=0.125;
+var p=GSCALE || 0.125;
 const maxw=100;
 const maxh=100;
 console.log(ww);
@@ -384,7 +429,8 @@ for(var i=0;i<game.l.length;i++){
  levels.appendChild(e);
 }
 resize();
-infoShow(levelUpdate);
+//infoShow(levelUpdate);
+levelUpdate(game.i);
 });
 
 window.addEventListener("resize", function(){
