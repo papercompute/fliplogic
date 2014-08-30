@@ -53,9 +53,9 @@ min-height: 100px;
  position: absolute;
  margin: auto;
 /* overflow: auto;*/
- width: 60%;
+ width: 100%;
 /* height: 50%;*/
- top: 10%; left: 0; bottom: 0; right: 0; 
+ top: 0; left: 0; bottom: 0; right: 0; 
 
 /*
  position: absolute;
@@ -64,11 +64,11 @@ min-height: 100px;
  transform: translate(-50%, -50%);
 */
  z-index: 10;
- opacity: 0.75;
+ opacity: 0.5;
 }
 
 .infoshow h1{
- font-size: 4em;
+ font-size: 3em;
 }
 
 .infoshow-fx{
@@ -171,11 +171,13 @@ min-height: 100px;
     <p>
     <a href="https://github.com/papercompute/fliplogic" style="font-size:2em;"> <strong><span style="color:blue;">f</span><span style="color:red;">l</span><span style="color:orange;">i</span><span style="color:gray;">p</span><span style="color:black;">l</span><span style="color:blue;">o</span><span style="color:green;">g</span><span style="color:magenta;">i</span><span style="color:blue;">c</span></strong> </a>
     </p>
+
     <p>
   <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out #fliplogic a #puzzle #game" data-via="papercompute" data-url="http://papercompute.github.io/fliplogic" data-counturl="https://github.com/papercompute/fliplogic">Tweet</a>
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
     </p>
+
     <p>
       Created by <a href="mailto:papercompute@gmail.com?subject=fliplogic">papercompute</a><br>      
       Inspired by <a href="http://gabrielecirulli.github.io/2048/">2048</a> and other puzzle games.
@@ -244,6 +246,10 @@ for (var i=0;i<boxes.length;i++){
  }
 }
 
+if(typeof game.l[game.i].cb!=="undefined"){
+ game.l[game.i].cb(e);
+}
+
 if(typeof e.target.gcb!=="undefined"){
  e.target.gcb(e.target);
 }
@@ -259,7 +265,8 @@ is.style.visibility="visible";
 setTimeout(function() {
  var is=document.querySelector(".infoshow");
  is.style.visibility="hidden";
- levelUpdate( (game.i+1) % game.l.length );
+/* levelUpdate( (game.i+1) % game.l.length ); */
+showLevels();
 }, 2250);
 
 } // if
@@ -280,32 +287,27 @@ while (zp.firstChild) {  zp.removeChild(zp.firstChild); }
 
 
 COLORS.length = 0;
-var scale=DEFSCALE;
 
-for(var i=0;i<game.l[l].length;i++){
- if(typeof game.l[l][i][0] == "string" && game.l[l][i][0] == "scale"){ 
-  scale=game.l[l][i][1]; 
-  continue;
- }
+if(typeof game.l[l].gen!=="undefined"){
+game.l[l].gen(l);
+}
+
+for(var i=0;i<game.l[l].b.length;i++){
  var gb = document.createElement("div");
  gb.setAttribute('class', 'gamebox gamebox-fx');
  gb.gindex=i;
-
- gb.gcb=game.l[l][i][3];
- var color=game.l[l][i][2] || "black";
+ gb.gcb=game.l[l].b[i][3];
+ var color=game.l[l].b[i][2] || "black";
  gb.setAttribute('style', 'background:'+color+';');
-/*
- if( COLORS.indexOf(color) < 0 && color!="black") {
-  COLORS.push(color);
- }
-*/
  zp.appendChild(gb);
 }
 
-if(scale!=GSCALE){
- GSCALE=scale;
- resize();
-}
+
+var scale=DEFSCALE;
+if(typeof game.l[l].scale!=="undefined"){ scale=game.l[l].scale;}
+GSCALE=scale;
+resize();
+
 
 var boxes=document.querySelectorAll(".gamebox");
 
@@ -325,7 +327,7 @@ setTimeout(function() {
 var boxes=document.querySelectorAll(".gamebox");
 for (var j=0;j<boxes.length;j++){
   var i=boxes[j].gindex;
-  boxes[j].setAttribute('style','left:'+(game.l[l][i][0]*100)+'%; top:'+(game.l[l][i][1]*100)+'%; background:'+game.l[l][i][2]+';');
+  boxes[j].setAttribute('style','left:'+(game.l[l].b[i][0]*100)+'%; top:'+(game.l[l].b[i][1]*100)+'%; background:'+game.l[l].b[i][2]+';');
 }
 
 
@@ -387,8 +389,8 @@ var wh=window.innerHeight || document.documentElement.clientHeight || document.b
 
 var wm=Math.min(ww,wh);
 var p=GSCALE || 0.125;
-const maxw=100;
-const maxh=100;
+const maxw=105;
+const maxh=105;
 console.log(ww);
 console.log(wh);
 var nw=Math.round(wm*p);if(nw>maxw){nw=maxw;}
@@ -442,6 +444,7 @@ window.addEventListener("resize", function(){
 
 
 <script>
+
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
