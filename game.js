@@ -251,7 +251,7 @@ b:[
  [-2, 3,"lightgray"],
  [-1, 3,"lightgray"],
  [ 0, 3,"lightgray"],
- [ 1, 3,"black"],
+// [ 1, 3,"black"],
 
  [ -2, 4,"lightgray"],
 
@@ -279,7 +279,7 @@ b:[
  [ 2,-1,"lightgray"],
  [ 3,-1,"lightgray"],
  [ 4,-2,"lightgray"],
- [ 4,-1,"black"],
+ //[ 4,-1,"black"],
 
  [-1, 0,"lightgray"],
  [ 0, 0,"lightgray"],
