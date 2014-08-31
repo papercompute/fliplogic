@@ -52,17 +52,8 @@ min-height: 100px;
 .infoshow{
  position: absolute;
  margin: auto;
-/* overflow: auto;*/
  width: 100%;
-/* height: 50%;*/
- top: 0; left: 0; bottom: 0; right: 0; 
-
-/*
- position: absolute;
- left: 50%;
- top: 10%;
- transform: translate(-50%, -50%);
-*/
+ top: -10px; left: 0; bottom: 0; right: 0; 
  z-index: 10;
  opacity: 0.5;
 }
@@ -104,18 +95,9 @@ min-height: 100px;
 .levels{
  position: absolute;
  margin: 15% auto;
-/* overflow: auto;*/
  width: 70%;
-/* height: 50%;*/
  top: 0; left: 0; bottom: 0; right: 0; 
 
-/*
- position: absolute;
- left: 50%;
- top: 50%;
- transform: translate(-50%, -50%);
- opacity: 0.5;
-*/
  text-align: center;
  font-size: 2em;
  z-index: 100;
@@ -132,7 +114,6 @@ min-height: 100px;
  opacity: 0.5;
  text-align: center;
  width:50%;
-/* background-color: lightgray;*/
 }
 
 #idReset{
@@ -190,6 +171,15 @@ min-height: 100px;
   </div>
 
   <div class="levels" style="visibility:hidden;">
+    <strong>
+     <span style="color:blue;">l</span>
+      <span style="color:red;">e</span>
+   <span style="color:orange;">v</span>
+     <span style="color:gray;">e</span>
+    <span style="color:green;">l</span>
+     <span style="color:blue;">s</span>
+     <br>
+    </strong>
   </div>
   <div class="zeropoint"></div>
 
@@ -358,12 +348,12 @@ cb(game.i);
 
 
 function showLevels(){
-console.log("showLevels");
+//console.log("showLevels");
 var zp=document.querySelector(".zeropoint");
 while (zp.firstChild) {  zp.removeChild(zp.firstChild); }
 
 var lvls=document.querySelector(".levels");
-console.log(lvls);
+//console.log(lvls);
 lvls.style.visibility="visible";
 }
 
@@ -378,7 +368,7 @@ lvls.style.visibility="hidden";
 (function(){}());
 
 function resize(){
- console.log('resize!')
+// console.log('resize!')
 
 var box=document.querySelector(".zeropoint");
 
@@ -391,25 +381,25 @@ var wm=Math.min(ww,wh);
 var p=GSCALE || 0.125;
 const maxw=105;
 const maxh=105;
-console.log(ww);
-console.log(wh);
+//console.log(ww);
+//console.log(wh);
 var nw=Math.round(wm*p);if(nw>maxw){nw=maxw;}
 var nh=Math.round(wm*p);if(nh>maxh){nh=maxh;}
-console.log(nw);console.log(nh);
+//console.log(nw);console.log(nh);
 box.style.width=nw+"px";box.style.height=nh+"px";
 }
 
 window.addEventListener("load", function () {
-console.log("load");
+//console.log("load");
 
 var idReset=document.getElementById("idReset");
 idReset.onclick=function(){
-console.log("idReset.onclick");
+//console.log("idReset.onclick");
 levelUpdate( game.i );
 };
 var idLevel=document.getElementById("idLevel");
 idLevel.onclick=function(){
-console.log("idLevel.onclick");
+//console.log("idLevel.onclick");
 showLevels();
 };
 
@@ -422,7 +412,7 @@ for(var i=0;i<game.l.length;i++){
  e.style.textDecoration="none";
 
  e.onclick=function(e){
-  console.log("onclick",e.target);
+//  console.log("onclick",e.target);
   var l=parseInt(e.target.innerHTML);
   if(l>=0 && l<game.l.length){ levelUpdate( l );}
   hideLevels();

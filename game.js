@@ -1,14 +1,24 @@
-/*idea move boxes like ttris*/
-
 function move(e,i,l,t){
   var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft+100*l)+"%";  e.style.top = (etop+100*t)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
 }
 
+function move1(e,i,l,t){
+  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;
+  e.style.left = (oleft+100*l)+"%";  e.style.top = (otop+100*t)+"%";
+}
+
+function move2(e,i,l,t){
+  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+  e.style.left = (eleft+100*l)+"%";  e.style.top = (etop+100*t)+"%"; 
+}
+
 var game={
 l : [
 { // L0
-cb:function(e){console.log("L0 cb",e);},
+cb:function(e){
+//console.log("L0 cb",e);
+},
 b:[ 
  [0,0,"red"],
  [1,1,"gray",function(e){
@@ -53,63 +63,68 @@ b:[
 },
 {// L2
 c:0,
+scale:0.09,
 cb:function(e){
-console.log("L2 cb");
-//game.l[game.i].b
-/*
-function move(e,i,l,t){
-  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
-   if(oleft == eleft && otop == etop){ e.style.left = (eleft+100*l)+"%";  e.style.top = (etop+100*t)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
-}
-*/
+//console.log("L2 cb");
+
 var boxes=document.querySelectorAll(".gamebox");
 
-//if(e.target
-move(boxes[1],1,1,1); 
-move(boxes[3],3,1,-1);
+switch(game.l[game.i].c%3){
+case 0:
+for(var i=0;i<=10;i+=5){
+move1(boxes[i+0],i+0,0,4); 
+move1(boxes[i+1],i+1,0,2);
 
-if(game.l[game.i].c%2 == 0){
-move(boxes[4],4,0,1);
-move(boxes[5],5,0,1); 
-move(boxes[6],6,0,1);
+move1(boxes[i+3],i+3,0,-2); 
+move1(boxes[i+4],i+4,0,-4);
 }
-else
-{
-move(boxes[7],7,0,1);
-move(boxes[8],8,0,1); 
-move(boxes[9],9,0,1);
+break;
+case 1:
+for(var i=0;i<=10;i+=5){
+move1(boxes[i+0],i+0,0,2); 
+move1(boxes[i+1],i+1,0,1);
+
+move1(boxes[i+3],i+3,0,-1); 
+move1(boxes[i+4],i+4,0,-2);
+}
+break;
+case 2:
+for(var i=0;i<=10;i+=5){
+move1(boxes[i+0],i+0,0,0); 
+move1(boxes[i+1],i+1,0,0);
+
+move1(boxes[i+3],i+3,0,0); 
+move1(boxes[i+4],i+4,0,0);
+}
+break;
 }
 
 game.l[game.i].c=game.l[game.i].c+1;
 },
 gen:function(l){
-console.log("L2 gen",l);
+//console.log("L2 gen",l);
 if(game.l[l].b.length>1){return;}
-for(var i=-2;i<=2;i+=2){
- game.l[l].b.push([-2,i,"orange"]);
+
+for(var i=-2;i<=2;i+=1){
+ game.l[l].b.push([i,i-2,"lightgrey"]);
 }
 
-for(var i=-2;i<=2;i+=2){
- game.l[l].b.push([-1,i,"orange"]);
+
+for(var i=-2;i<=2;i+=1){
+ game.l[l].b.push([i,i,"orange"]);
 }
-for(var i=-2;i<=2;i+=2){
- game.l[l].b.push([+1,i,"orange"]);
+
+for(var i=-2;i<=2;i+=1){
+ game.l[l].b.push([i,i+2,"red"]);
 }
-for(var i=-3;i<=1;i+=2){
- game.l[l].b.push([+2,i,"red"]);
-}
-for(var i=-3;i<=1;i+=2){
- game.l[l].b.push([+3,i,"red"]);
-}
+
 game.l[l].c=0;
 },
-b:[
- [0,0,"red"],
-]
+b:[]
 },
 {// L3
 cb:function(e){
-console.log("L3 cb");
+//console.log("L3 cb");
 
 var boxes=document.querySelectorAll(".gamebox");
 
@@ -126,7 +141,7 @@ move(boxes[i],i,0,1);
 
 },
 gen:function(l){
-console.log("L3 gen",l);
+//console.log("L3 gen",l);
 if(game.l[l].b.length>0){return;}
 for(var i=-3;i<=3;i+=2){
  game.l[l].b.push([-2,i,"orange"]);
@@ -147,6 +162,33 @@ for(var i=-3;i<=3;i+=2){
 b:[]
 },
 {// L4
+c:0,
+gen:function(l){
+game.l[l].c=0;
+},
+cb:function(e){
+//console.log("L4 cb");
+
+var boxes=document.querySelectorAll(".gamebox");
+
+
+if(game.l[game.i].c%2 == 0){
+for(var i=0;i<=4;i+=1){
+move(boxes[i],i,0,1); 
+}
+}
+else
+{
+for(var i=0;i<=4;i+=1){
+move(boxes[i+5],i+5,0,-1); 
+}
+}
+
+game.l[game.i].c=game.l[game.i].c+1;
+
+
+},
+
 b:[ 
  [-2,-2,"red"],
  [-1,-1,"red"],
@@ -403,7 +445,7 @@ i:0
 };
 
 (function(){
-//console.log(game);
+//console.log("game.js");
 }());
 
 
