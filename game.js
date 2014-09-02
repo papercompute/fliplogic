@@ -63,7 +63,7 @@ b:[
 },
 {// L2
 c:0,
-scale:0.09,
+scale:0.1,
 cb:function(e){
 //console.log("L2 cb");
 
@@ -278,7 +278,7 @@ b:[
  [ 1,-1,"lightgray"],
  [ 2,-1,"lightgray"],
  [ 3,-1,"lightgray"],
- [ 4,-2,"lightgray"],
+ [ 4,-2,"red"],
  //[ 4,-1,"black"],
 
  [-1, 0,"lightgray"],
