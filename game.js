@@ -407,12 +407,40 @@ b:[
 },
 {// L10
 scale:0.085,
+cb:function(e){
+var boxes=document.querySelectorAll(".gamebox");
+
+move(boxes[+1],+1,0,-1); 
+
+move(boxes[+3],+3,1,0); 
+move(boxes[+4],+4,-1,0);
+
+move(boxes[+5],+5,1,0); 
+move(boxes[+7],+7,-1,0);
+move(boxes[+6],+6,-1,0);
+
+move(boxes[+9],+9,1,0);
+move(boxes[+10],+10,-1,0);
+
+move(boxes[+11],+11,1,0);
+move(boxes[+12],+12,-1,0);
+move(boxes[+13],+13,-1,0);
+
+move(boxes[+14],+14,1,0);
+move(boxes[+15],+15,-1,0);
+
+move(boxes[+16],+16,1,0);
+move(boxes[+17],+17,-1,0);
+
+
+},
 b:[ 
- [-1,-3,"lightgray"],
- [ 0,-3,"lightgray"],
- [ 1,-3,"lightgray"],
- [-2,-2,"lightgray"],
- [ 2,-2,"lightgray"],
+ [-1,-3,"lightgray"], // 0
+ [ 0,-3,"lightgray"], // 1
+ [ 1,-3,"lightgray"], // 2
+
+ [-2,-2,"lightgray"], // 3
+ [ 2,-2,"lightgray"], // 4
 
  [-3, -1,"red"],
  [ 2, -1,"lightgray"],
