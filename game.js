@@ -466,7 +466,59 @@ b:[
  [3, 4,"lightgray"],
 
 ]
+},
+
+{// L11
+scale:0.095,
+c:0,
+cb:function(e){
+var boxes=document.querySelectorAll(".gamebox");
+},
+gen:function(l){
+
+if(game.l[l].b.length>1){return;}
+
+for(var i=-3;i<=3;i+=1){
+ for(var j=-3;j<=3;j+=1){
+  game.l[l].b.push([i,j,"lightgrey"]);
+ }
 }
+game.l[l].b.push([4,4,"red"]);
+
+
+game.l[l].c=0;
+},
+
+b:[]
+},
+
+{// L12
+scale:0.095,
+c:0,
+cb:function(e){
+var boxes=document.querySelectorAll(".gamebox");
+},
+gen:function(l){
+
+if(game.l[l].b.length>1){return;}
+
+for(var i=-3;i<=3;i+=1){
+ for(var j=-3;j<=3;j+=1){
+  if (i%2==0 && j%2==0){ continue;}
+  game.l[l].b.push([i,j,"lightgrey"]);
+ }
+}
+game.l[l].b.push([4,4,"red"]);
+game.l[l].b.push([-4,-4,"red"]);
+game.l[l].b.push([-4,4,"red"]);
+game.l[l].b.push([4,-4,"red"]);
+
+game.l[l].c=0;
+},
+
+b:[]
+}
+
 
 ],
 i:0
