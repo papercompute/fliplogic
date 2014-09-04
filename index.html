@@ -231,7 +231,8 @@ return true;
 
 function updateColor(e){
 //console.log("updateColor",e.style.backgroundColor);
-var ci=COLORS.indexOf(e.style.backgroundColor); 
+var ci=COLORS.indexOf(e.style.backgroundColor);
+//console.log("ci",ci,COLORS); 
 if(ci>=0){
  ci=(ci+1) % COLORS.length; 
  e.style.backgroundColor = COLORS[ci];
@@ -333,7 +334,7 @@ for (var j=0;j<boxes.length;j++){
  }
 }
 
-//console.log("COLORS",COLORS);
+console.log("COLORS",COLORS);
 
 
 setTimeout(function() {

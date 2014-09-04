@@ -13,6 +13,10 @@ function move2(e,i,l,t){
   e.style.left = (eleft+100*l)+"%";  e.style.top = (etop+100*t)+"%"; 
 }
 
+function move3(e,i,l,t){
+  e.style.left = (+100*l)+"%";  e.style.top = (+100*t)+"%"; 
+}
+
 var game={
 l : [
 { // L0
@@ -472,18 +476,30 @@ b:[
 scale:0.095,
 c:0,
 cb:function(e){
+
 var boxes=document.querySelectorAll(".gamebox");
+
+switch(game.l[game.i].c%4){
+case 0: move3(boxes[0],0,4,4); move3(boxes[1],0,-4,-4); break
+case 1: move3(boxes[0],0,-4,4); move3(boxes[1],0,4,-4);break
+case 2: move3(boxes[0],0,4,-4); move3(boxes[1],0,-4,4);break
+case 3: move3(boxes[0],0,-4,-4); move3(boxes[1],0,4,4);break
+}
+game.l[game.i].c=game.l[game.i].c+1;
 },
 gen:function(l){
 
 if(game.l[l].b.length>1){return;}
+
+game.l[l].b.push([4,4,"red"]);
+game.l[l].b.push([-4,-4,"gray"]);
 
 for(var i=-3;i<=3;i+=1){
  for(var j=-3;j<=3;j+=1){
   game.l[l].b.push([i,j,"lightgrey"]);
  }
 }
-game.l[l].b.push([4,4,"red"]);
+
 
 
 game.l[l].c=0;
