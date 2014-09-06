@@ -182,12 +182,12 @@ min-height: 100px;
     </p>
 
     <p>
-
+<!--
   <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out #fliplogic a #puzzle #game" data-via="papercompute" data-url="http://papercompute.github.io/fliplogic" data-counturl="https://github.com/papercompute/fliplogic">Tweet</a>
 
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-
+-->
     </p>
 
     <p>
@@ -424,6 +424,7 @@ var nw=Math.round(wm*p);if(nw>maxw){nw=maxw;}
 var nh=Math.round(wm*p);if(nh>maxh){nh=maxh;}
 //console.log(nw);console.log(nh);
 box.style.width=nw+"px";box.style.height=nh+"px";
+//box.style.left=Math.round((ww-nw)/2)+"px";box.style.top=Math.round((wh-nh)/2)+"px";
 }
 
 window.addEventListener("load", function () {
@@ -445,15 +446,21 @@ showLevels();
 var levels=document.querySelector(".levels");
 for(var i=0;i<game.l.length;i++){
  var e = document.createElement("a");
- e.setAttribute('href', '#');
+ e.setAttribute('href', '#l'+i);
  e.innerHTML=" "+i;
  e.style.textDecoration="none";
 
  e.onclick=function(e){
+  e.preventDefault(); 
 //  console.log("onclick",e.target);
   var l=parseInt(e.target.innerHTML);
-  if(l>=0 && l<game.l.length){ levelUpdate( l );}
-  hideLevels();
+  if(l>=0 && l<game.l.length){ 
+   levelUpdate( l );
+   game.lock=1;
+   location.hash="#l"+l;
+   setTimeout(function() {game.lock=0;}, 50);   
+  }
+  hideLevels();  
  }
 
  levels.appendChild(e);
@@ -463,22 +470,46 @@ resize();
 
 var fl=document.querySelector(".fliplogic");
 fl.style.visibility="hidden";
+var l=game.i;
 
+//console.log("location.hash ",location.hash.slice(1,2));
+if(location.hash.slice(1,2) == "l" || location.hash.slice(1,2) == "L"){
+ try{
+  var h=parseInt(location.hash.slice(2));
+//  console.log("h",h);
+  if(h>=0 && h<game.l.length){l=h;}
+  }catch(e){}
+}
 
-
-levelUpdate(game.i);
+//console.log("l",l);
+levelUpdate(l);
 });
 
 window.addEventListener("resize", function(){
  resize();
 }, true);
 
+if (!("onhashchange" in window)) {
+  console.log("The browser doesn't support the hashchange event!");
+}
+
+window.addEventListener("hashchange", function(){
+if (game.lock) return;
+// console.log("hashchange",location.hash);
+if(location.hash.slice(1,2) == "l" || location.hash.slice(1,2) == "L"){
+  var l=parseInt(location.hash.slice(2));
+  if(l>=0 && l<game.l.length){
+   levelUpdate(l);
+  }
+ }
+
+}, false);
+
 </script>
 
 
 
 <script>
-
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -486,7 +517,6 @@ window.addEventListener("resize", function(){
 
   ga('create', 'UA-54107986-1', 'auto');
   ga('send', 'pageview');
-
 </script>
 </body>
 </html>
