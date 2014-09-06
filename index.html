@@ -19,12 +19,13 @@ html,body {
 margin: 0;
 min-width: 100px;
 min-height: 100px;
+overflow: auto;
 }
 
 .zeropoint{
  position: absolute;
  left: 44.5%;
- top: 42%;
+ top: 44.5%;
  width:12.5%;
  height:12.5%;
  
@@ -192,7 +193,8 @@ min-height: 100px;
 
     <p>
       Created by <a href="mailto:papercompute@gmail.com?subject=fliplogic">papercompute</a><br>      
-      Inspired by <a href="http://gabrielecirulli.github.io/2048/">2048</a> and other puzzle games.
+      Inspired by <a href="http://gabrielecirulli.github.io/2048/">2048</a> and other puzzle games.<br> 
+      <br> <br> 
     </p>
 
   </div>
@@ -295,7 +297,8 @@ showLevels();
 
 } // if
 
-
+game.cc=game.cc+1;
+document.getElementById("idLevel").innerHTML='L'+game.i+'('+game.cc+')';
 }
 
 
@@ -359,9 +362,11 @@ for (var j=0;j<boxes.length;j++){
 
 
 game.i=l;
+game.cc=0;
 
-var idLevel=document.getElementById("idLevel");
-idLevel.innerHTML='L'+l;
+//var idLevel=document.getElementById("idLevel");
+//idLevel.innerHTML='L'+l;
+document.getElementById("idLevel").innerHTML='L'+l;
 
 }
 
