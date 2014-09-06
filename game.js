@@ -1,5 +1,5 @@
 function move(e,i,l,t){
-  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft+100*l)+"%";  e.style.top = (etop+100*t)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
 }
 
@@ -17,6 +17,7 @@ function move3(e,i,l,t){
   e.style.left = (+100*l)+"%";  e.style.top = (+100*t)+"%"; 
 }
 
+
 var game={
 l : [
 { // L0
@@ -26,19 +27,19 @@ cb:function(e){
 b:[ 
  [0,0,"red"],
  [1,1,"gray",function(e){
-   var i=e.gindex;  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   var i=e.gindex;  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft+100)+"%";  e.style.top = (etop+100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
  [-1,-1,"blue",function(e){
-   var i=e.gindex;  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   var i=e.gindex;  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop-100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
  [-1,1,"green",function(e){
-   var i=e.gindex;  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   var i=e.gindex;  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop+100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
  [1,-1,"orange",function(e){
-   var i=e.gindex;  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   var i=e.gindex;  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft+100)+"%";  e.style.top = (etop-100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
 ],
@@ -51,16 +52,16 @@ b:[
  [-1,1,"gray"],
  [1,-1,"blue"],
  [-2,-2,"orange",function(e){
-   var i=e.gindex;  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   var i=e.gindex;  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop-100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
  [-2,2,"orange",function(e){ 
-   var i=e.gindex;  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   var i=e.gindex;  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop+100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
  [2,-2,"orange"],
  [2,2,"orange",function(e){
-   var i=e.gindex;  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   var i=e.gindex;  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft+100)+"%";  e.style.top = (etop+100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
 ]
@@ -73,39 +74,40 @@ cb:function(e){
 
 var boxes=document.querySelectorAll(".gamebox");
 
-switch(game.l[game.i].c%3){
+switch(this.c%3){
 case 0:
 for(var i=0;i<=10;i+=5){
-move1(boxes[i+0],i+0,0,4); 
-move1(boxes[i+1],i+1,0,2);
+move1.call(this,boxes[i+0],i+0,0,4); 
+move1.call(this,boxes[i+1],i+1,0,2);
 
-move1(boxes[i+3],i+3,0,-2); 
-move1(boxes[i+4],i+4,0,-4);
+move1.call(this,boxes[i+3],i+3,0,-2); 
+move1.call(this,boxes[i+4],i+4,0,-4);
 }
 break;
 case 1:
 for(var i=0;i<=10;i+=5){
-move1(boxes[i+0],i+0,0,2); 
-move1(boxes[i+1],i+1,0,1);
+move1.call(this,boxes[i+0],i+0,0,2); 
+move1.call(this,boxes[i+1],i+1,0,1);
 
-move1(boxes[i+3],i+3,0,-1); 
-move1(boxes[i+4],i+4,0,-2);
+move1.call(this,boxes[i+3],i+3,0,-1); 
+move1.call(this,boxes[i+4],i+4,0,-2);
 }
 break;
 case 2:
 for(var i=0;i<=10;i+=5){
-move1(boxes[i+0],i+0,0,0); 
-move1(boxes[i+1],i+1,0,0);
+move1.call(this,boxes[i+0],i+0,0,0); 
+move1.call(this,boxes[i+1],i+1,0,0);
 
-move1(boxes[i+3],i+3,0,0); 
-move1(boxes[i+4],i+4,0,0);
+move1.call(this,boxes[i+3],i+3,0,0); 
+move1.call(this,boxes[i+4],i+4,0,0);
 }
 break;
 }
 
-game.l[game.i].c=game.l[game.i].c+1;
+this.c=this.c+1;
 },
 gen:function(l){
+game.l[l].c=0;
 //console.log("L2 gen",l);
 if(game.l[l].b.length>1){return;}
 
@@ -122,7 +124,7 @@ for(var i=-2;i<=2;i+=1){
  game.l[l].b.push([i,i+2,"red"]);
 }
 
-game.l[l].c=0;
+
 },
 b:[]
 },
@@ -133,13 +135,13 @@ cb:function(e){
 var boxes=document.querySelectorAll(".gamebox");
 
 for(var i=0;i<=3;i+=1){
-move(boxes[i],i,0,1); 
+move.call(this,boxes[i],i,0,1); 
 }
 for(var i=8;i<=11;i+=1){
-move(boxes[i],i,0,1); 
+move.call(this,boxes[i],i,0,1); 
 }
 for(var i=16;i<=19;i+=1){
-move(boxes[i],i,0,1); 
+move.call(this,boxes[i],i,0,1); 
 }
 
 
@@ -176,19 +178,19 @@ cb:function(e){
 var boxes=document.querySelectorAll(".gamebox");
 
 
-if(game.l[game.i].c%2 == 0){
+if(this.c%2 == 0){
 for(var i=0;i<=4;i+=1){
-move(boxes[i],i,0,1); 
+move.call(this,boxes[i],i,0,1); 
 }
 }
 else
 {
 for(var i=0;i<=4;i+=1){
-move(boxes[i+5],i+5,0,-1); 
+move.call(this,boxes[i+5],i+5,0,-1); 
 }
 }
 
-game.l[game.i].c=game.l[game.i].c+1;
+this.c=this.c+1;
 
 
 },
@@ -266,7 +268,7 @@ scale:0.1,
 b:[ 
  [-1,-4,"lightgray"],
  [-3,-3,"red",function(e){
-   var i=e.gindex;  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   var i=e.gindex;  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop-100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
  [-2,-3,"lightgray"],
@@ -310,13 +312,13 @@ b:[
 scale:0.09,
 b:[ 
  [-3,-2,"lightgray",function(e){
-   var i=e.gindex;  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   var i=e.gindex;  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop-100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
  [-1,-2,"lightgray"],
  [ 1,-2,"lightgray"],
  [ 3,-2,"lightgray",function(e){
-   var i=e.gindex;  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   var i=e.gindex;  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft+100)+"%";  e.style.top = (etop-100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
 
@@ -334,13 +336,13 @@ b:[
  [ 2, 1,"blue"],
 
  [-3, 2,"lightgray",function(e){
-   var i=e.gindex;  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   var i=e.gindex;  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft-100)+"%";  e.style.top = (etop+100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
  [-1, 2,"lightgray"],
  [ 1, 2,"lightgray"],
  [ 3, 2,"lightgray",function(e){
-   var i=e.gindex;  var oleft=game.l[game.i].b[i][0]*100; var otop=game.l[game.i].b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
+   var i=e.gindex;  var oleft=this.b[i][0]*100; var otop=this.b[i][1]*100;  var eleft=parseInt(e.style.left.slice(0, -1)); var etop=parseInt(e.style.top.slice(0, -1));
    if(oleft == eleft && otop == etop){ e.style.left = (eleft+100)+"%";  e.style.top = (etop+100)+"%"; }else{ e.style.left = (oleft)+"%";  e.style.top = (otop)+"%"; }
  }],
 ]
@@ -414,27 +416,27 @@ scale:0.085,
 cb:function(e){
 var boxes=document.querySelectorAll(".gamebox");
 
-move(boxes[+1],+1,0,-1); 
+move.call(this,boxes[+1],+1,0,-1); 
 
-move(boxes[+3],+3,1,0); 
-move(boxes[+4],+4,-1,0);
+move.call(this,boxes[+3],+3,1,0); 
+move.call(this,boxes[+4],+4,-1,0);
 
-move(boxes[+5],+5,1,0); 
-move(boxes[+7],+7,-1,0);
-move(boxes[+6],+6,-1,0);
+move.call(this,boxes[+5],+5,1,0); 
+move.call(this,boxes[+7],+7,-1,0);
+move.call(this,boxes[+6],+6,-1,0);
 
-move(boxes[+9],+9,1,0);
-move(boxes[+10],+10,-1,0);
+move.call(this,boxes[+9],+9,1,0);
+move.call(this,boxes[+10],+10,-1,0);
 
-move(boxes[+11],+11,1,0);
-move(boxes[+12],+12,-1,0);
-move(boxes[+13],+13,-1,0);
+move.call(this,boxes[+11],+11,1,0);
+move.call(this,boxes[+12],+12,-1,0);
+move.call(this,boxes[+13],+13,-1,0);
 
-move(boxes[+14],+14,1,0);
-move(boxes[+15],+15,-1,0);
+move.call(this,boxes[+14],+14,1,0);
+move.call(this,boxes[+15],+15,-1,0);
 
-move(boxes[+16],+16,1,0);
-move(boxes[+17],+17,-1,0);
+move.call(this,boxes[+16],+16,1,0);
+move.call(this,boxes[+17],+17,-1,0);
 
 
 },
@@ -476,19 +478,19 @@ b:[
 scale:0.095,
 c:0,
 cb:function(e){
-//console.log(game.l[game.i].c);
+//console.log(this.c);
 var boxes=document.querySelectorAll(".gamebox");
 
-switch(game.l[game.i].c%4){
+switch(this.c%4){
 case 0: move3(boxes[0],0,4,4); move3(boxes[1],0,-4,-4); break
 case 1: move3(boxes[0],0,-4,4); move3(boxes[1],0,4,-4);break
 case 2: move3(boxes[0],0,4,-4); move3(boxes[1],0,-4,4);break
 case 3: move3(boxes[0],0,-4,-4); move3(boxes[1],0,4,4);break
 }
-game.l[game.i].c=game.l[game.i].c+1;
+this.c=this.c+1;
 },
 gen:function(l){
-
+game.l[l].c=1;
 if(game.l[l].b.length>1){return;}
 
 game.l[l].b.push([4,4,"red"]);
@@ -500,9 +502,6 @@ for(var i=-3;i<=3;i+=1){
  }
 }
 
-
-
-game.l[l].c=1;
 },
 
 b:[]
@@ -512,19 +511,19 @@ b:[]
 scale:0.095,
 c:0,
 cb:function(e){
-//console.log(game.l[game.i].c);
+//console.log(this.c);
 var boxes=document.querySelectorAll(".gamebox");
 
-switch(game.l[game.i].c%4){
+switch(this.c%4){
 case 0: move3(boxes[0],0,4,4);   move3(boxes[1],0,-4,-4); move3(boxes[2],0,-4,4);   move3(boxes[3],0,4,-4); break
 case 1: move3(boxes[0],0,-4,4);  move3(boxes[1],0,4,-4);  move3(boxes[2],0,4,4);   move3(boxes[3],0,-4,-4);break
 case 2: move3(boxes[0],0,4,-4);  move3(boxes[1],0,-4,4);  move3(boxes[2],0,-4,-4);   move3(boxes[3],0,4,4);break
 case 3: move3(boxes[0],0,-4,-4); move3(boxes[1],0,4,4);   move3(boxes[2],0,4,-4);   move3(boxes[3],0,-4,4);break
 }
-game.l[game.i].c=game.l[game.i].c+1;
+this.c=this.c+1;
 },
 gen:function(l){
-
+game.l[l].c=1;
 if(game.l[l].b.length>1){return;}
 
 game.l[l].b.push([4,4,"red"]);
@@ -539,7 +538,7 @@ for(var i=-3;i<=3;i+=1){
  }
 }
 
-game.l[l].c=1;
+
 },
 
 b:[]
@@ -549,18 +548,18 @@ b:[]
 scale:0.095,
 c:0,
 cb:function(e){
-//console.log(game.l[game.i].c);
+//console.log(this.c);
 var boxes=document.querySelectorAll(".gamebox");
 
-game.l[game.i].c=game.l[game.i].c+1;
+this.c=this.c+1;
 },
 
 gen:function(l){
-
+game.l[l].c=1;
 if(game.l[l].b.length>1){return;}
 
 
-game.l[l].c=1;
+
 },
 
 b:[
@@ -615,7 +614,139 @@ b:[
 
 
 ]
+},
+
+
+{// L14
+//scale:0.095,
+c:0,
+cb:function(e){
+//console.log(this.c);
+var boxes=document.querySelectorAll(".gamebox");
+
+var p=[ [-2,-2],[2,2],[-2,2],[2,-2],[-1,-1],[1,1],[-1,1],[1,-1] ];
+
+for(var i=0;i<8;i++){
+var j=Math.round(Math.random()*(p.length-1));
+//console.log(j);
+move3(boxes[i],i,p[j][0],p[j][1]);
+p.splice(j,1);
 }
+
+
+this.c=this.c+1;
+},
+
+gen:function(l){
+game.l[l].c=1;
+if(game.l[l].b.length>1){return;}
+
+
+
+},
+
+b:[
+
+ [-2,-2,"lightgray"], // 0
+ [-1,-1,"red"], // 1
+
+ [2,2,"lightgray"], // 0
+ [1,1,"red"], // 1
+
+ [-2,2,"lightgray"], // 0
+ [-1,1,"red"], // 1
+
+ [2,-2,"lightgray"], // 0
+ [1,-1,"red"], // 1
+
+
+]
+},
+
+
+{// L15
+//scale:0.095,
+c:0,
+cb:function(e){
+//console.log(this.c);
+var boxes=document.querySelectorAll(".gamebox");
+
+var p=this.b.slice(0);
+var L=p.length;
+for(var i=0;i<L;i++){
+var j=Math.round(Math.random()*(p.length-1));
+//console.log(j);
+move3(boxes[i],i,p[j][0],p[j][1]);
+p.splice(j,1);
+}
+
+
+this.c=this.c+1;
+},
+
+gen:function(l){
+game.l[l].c=1;
+if(game.l[l].b.length>1){return;}
+
+var color="lightgrey";
+for(var i=-3;i<=3;i+=1){
+ for(var j=-3;j<=3;j+=1){
+  if (i%2==0 && j%2==0){ color="lightgrey"}
+  else if (i%2==0 || j%2==0){ color="black"} else{color="red"}
+  
+  game.l[l].b.push([i,j,color]);
+ }
+}
+
+
+},
+
+b:[]
+},
+
+
+
+{// L16
+scale:0.095,
+c:0,
+cb:function(e){
+var boxes=document.querySelectorAll(".gamebox");
+var p=this.b.slice(4);
+var L=p.length;
+for(var i=0;i<L;i++){
+var j=Math.round(Math.random()*(p.length-1));
+move3(boxes[i+4],i+4,p[j][0],p[j][1]);
+p.splice(j,1);
+}
+
+
+this.c=this.c+1;
+},
+
+gen:function(l){
+game.l[l].c=1;
+if(game.l[l].b.length>1){return;}
+
+game.l[l].b.push([4,4,"red"]);
+game.l[l].b.push([-4,-4,"lightgrey"]);
+game.l[l].b.push([-4,4,"red"]);
+game.l[l].b.push([4,-4,"lightgrey"]);
+
+var color="lightgrey";
+for(var i=-3;i<=3;i+=1){
+ for(var j=-3;j<=3;j+=1){
+  if (i==3 || j==3 || i==-3 || j==-3){ color="black"}
+  else if (i%2==0 || j%2==0 ){ color="red"} else{color="lightgrey"}
+ 
+  game.l[l].b.push([i,j,color]);
+ }
+}
+
+
+},
+
+b:[]
+},
 
 
 
