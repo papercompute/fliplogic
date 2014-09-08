@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" manifest="cache.appcache">
+<html lang="en">
 <head>
  <meta charset="utf-8">
  <title>fliplogic</title>
@@ -19,12 +19,13 @@ html,body {
 margin: 0;
 min-width: 100px;
 min-height: 100px;
+overflow: auto;
 }
 
 .zeropoint{
  position: absolute;
  left: 44.5%;
- top: 42%;
+ top: 44.5%;
  width:12.5%;
  height:12.5%;
  
@@ -50,36 +51,45 @@ min-height: 100px;
 
 
 .infoshow{
- position: absolute;
- margin: auto;
+ position: fixed;
  width: 100%;
- top: -10px; left: 0; bottom: 0; right: 0; 
- z-index: 10;
- opacity: 0.5;
+ height: 100%;
+/* overflow: auto;*/
+ top: 0; left: 0; bottom: 0; right: 0; 
+ z-index: 1000;
+ opacity: 0.75;
+ background-color: gray;
+ font-size: 1.5em;
 }
 
 .infoshow h1{
- font-size: 3em;
+ font-size: 1.5em;
 }
 
 .infoshow-fx{
  transition: font-size 1.3s;
- moz-transition: font-size 1.3s;
+ -moz-transition: font-size 1.3s;
+ -webkit-transition: font-size 1.3s;
+ -ms-transition: font-size 1.3s;
+ -o-transition: font-size 1.3s;
 }
 
 .gamebox{
  position: absolute;
  top: 0%;
  left: 0%;
- width:97.5%;
- height:97.5%;
+ width:97%;
+ height:97%;
  background: green;
  border-radius: 5px;
 }
 
 .gamebox-fx{
  transition: left 1.3s, top 1.3s;
- moz-transition: left 1.3s, top 1.3s;
+ -moz-transition: left 1.3s, top 1.3s;
+ -webkit-transition: left 1.3s, top 1.3s;
+ -ms-transition: left 1.3s, top 1.3s;
+ -o-transition: left 1.3s, top 1.3s;
 }
 
 
@@ -109,12 +119,26 @@ min-height: 100px;
 
 .fliplogic{
  position: absolute;
- margin: 0 auto;
+ margin: auto;
  top: 0; left: 0; bottom: 0; right: 0; 
- opacity: 0.5;
+/* opacity: 0.5;*/
  text-align: center;
- width:50%;
+ width:100%;
+ height:30%;
+ font-size:5em;
+ font-family: Geneva, Arial, Helvetica, sans-serif;
 }
+
+.fliplogic h1{
+ font-size: 0.5em;
+ font-color:lightgray;
+}
+
+.fliplogic h2{
+ font-size: 1em;
+ font-color:lightgray;
+}
+
 
 #idReset{
  float:left;
@@ -136,7 +160,21 @@ min-height: 100px;
 <body ondragstart="return false;" ondrop="return false;">
 -->
 <body>
-  <div class="fliplogic">
+  <div class="fliplogic" style="visibility:visible;">
+    <bold>
+     <span style="color:blue;">F</span>
+      <span style="color:red;">L</span>
+   <span style="color:orange;">I</span>
+     <span style="color:gray;">P</span>
+    <span style="color:green;">L</span>
+     <span style="color:blue;">O</span>
+     <span style="color:yellow;">G</span>
+     <span style="color:lightgray;">I</span>
+     <span style="color:green;">C</span>
+     <br>
+    </bold>
+    <h2 style="color:lightgray;">=D E M O=</h2>
+    <h1 style="color:lightgray;">loading</h1>
   </div>
   <div class="header">
    <a id="idReset" href="#">R</a>
@@ -154,14 +192,18 @@ min-height: 100px;
     </p>
 
     <p>
-  <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out #fliplogic a #puzzle #game" data-via="papercompute" data-url="http://papercompute.github.io/fliplogic" data-counturl="https://github.com/papercompute/fliplogic">Tweet</a>
+
+  <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out #fliplogic a #puzzle #game" data-via="papercompute" data-url="http://git.io/7513Iw" data-counturl="http://papercompute.github.io/fliplogic/">Tweet</a>
+
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
 
     </p>
 
     <p>
       Created by <a href="mailto:papercompute@gmail.com?subject=fliplogic">papercompute</a><br>      
-      Inspired by <a href="http://gabrielecirulli.github.io/2048/">2048</a> and other puzzle games.
+      Inspired by <a href="http://gabrielecirulli.github.io/2048/">2048</a> and other puzzle games.<br> 
+      <br> <br> 
     </p>
 
   </div>
@@ -207,7 +249,8 @@ return true;
 
 function updateColor(e){
 //console.log("updateColor",e.style.backgroundColor);
-var ci=COLORS.indexOf(e.style.backgroundColor); 
+var ci=COLORS.indexOf(e.style.backgroundColor);
+//console.log("ci",ci,COLORS); 
 if(ci>=0){
  ci=(ci+1) % COLORS.length; 
  e.style.backgroundColor = COLORS[ci];
@@ -218,6 +261,11 @@ else{
 
 }
 
+function isHide()
+{
+var is=document.querySelector(".infoshow");
+is.style.visibility="hidden";
+}
 
 function onclick(e){
 
@@ -236,12 +284,14 @@ for (var i=0;i<boxes.length;i++){
  }
 }
 
-if(typeof game.l[game.i].cb!=="undefined"){
- game.l[game.i].cb(e);
+var lcb = game.l[game.i].cb;
+
+if(typeof lcb!=="undefined"){
+  lcb.call(game.l[game.i],e);
 }
 
 if(typeof e.target.gcb!=="undefined"){
- e.target.gcb(e.target);
+ e.target.gcb.call(game.l[game.i],e.target);
 }
 
 if(checkBoxesColor()){
@@ -249,19 +299,28 @@ console.log("Yooohoooooooooooooooooo!!!");
 
 var is=document.querySelector(".infoshow");
 var ish1=document.querySelector(".infoshow h1");
-ish1.innerHTML="Level "+game.i+" complite!";
+var shareText=
+ish1.innerHTML='<p>Level '+game.i+' complite <br> in '+(game.cc+1)+' clicks!</p>'+
+               '<p><a href="#" onclick="javascript:levelUpdate( (game.i ));isHide();return false;">Restart</a></p>'+
+               '<p><a href="#" onclick="javascript:levelUpdate( (game.i+1) % game.l.length );isHide();return false;">Next level</a></p>'+
+               '<p><a href="#" onclick="javascript:showLevels();window.scrollTo(0,0);isHide();return false;">Choose level</a></p>'+
+               '<p><a href="http://twitter.com/share?url='+escape('http://papercompute.github.io/fliplogic')+'&text='+escape('I just complite #fliplogic #l'+game.i+' in '+(game.cc+1)+' clicks! #indie #indiedev #gamedev #game')+'"'+  'onclick="javascript:window.open(this.href);return false;">Tweet</a></p>';
+
 is.style.visibility="visible";
 
+/*
 setTimeout(function() {
  var is=document.querySelector(".infoshow");
  is.style.visibility="hidden";
-/* levelUpdate( (game.i+1) % game.l.length ); */
+// levelUpdate( (game.i+1) % game.l.length ); 
 showLevels();
-}, 2250);
+}, 10000); // 10s
+*/
 
 } // if
 
-
+game.cc=game.cc+1;
+document.getElementById("idLevel").innerHTML='L'+game.i+'('+game.cc+')';
 }
 
 
@@ -325,11 +384,16 @@ for (var j=0;j<boxes.length;j++){
 
 
 game.i=l;
+game.cc=0;
 
-var idLevel=document.getElementById("idLevel");
-idLevel.innerHTML='L'+l;
+//var idLevel=document.getElementById("idLevel");
+//idLevel.innerHTML='L'+l;
+document.getElementById("idLevel").innerHTML='L'+l;
 
 }
+
+
+
 
 function infoShow(cb)
 {
@@ -379,14 +443,15 @@ var wh=window.innerHeight || document.documentElement.clientHeight || document.b
 
 var wm=Math.min(ww,wh);
 var p=GSCALE || 0.125;
-const maxw=105;
-const maxh=105;
+const maxw=110;
+const maxh=110;
 //console.log(ww);
 //console.log(wh);
 var nw=Math.round(wm*p);if(nw>maxw){nw=maxw;}
 var nh=Math.round(wm*p);if(nh>maxh){nh=maxh;}
 //console.log(nw);console.log(nh);
 box.style.width=nw+"px";box.style.height=nh+"px";
+//box.style.left=Math.round((ww-nw)/2)+"px";box.style.top=Math.round((wh-nh)/2)+"px";
 }
 
 window.addEventListener("load", function () {
@@ -397,6 +462,7 @@ idReset.onclick=function(){
 //console.log("idReset.onclick");
 levelUpdate( game.i );
 };
+
 var idLevel=document.getElementById("idLevel");
 idLevel.onclick=function(){
 //console.log("idLevel.onclick");
@@ -407,34 +473,70 @@ showLevels();
 var levels=document.querySelector(".levels");
 for(var i=0;i<game.l.length;i++){
  var e = document.createElement("a");
- e.setAttribute('href', '#');
+ e.setAttribute('href', '#l'+i);
  e.innerHTML=" "+i;
  e.style.textDecoration="none";
 
  e.onclick=function(e){
+  e.preventDefault(); 
 //  console.log("onclick",e.target);
   var l=parseInt(e.target.innerHTML);
-  if(l>=0 && l<game.l.length){ levelUpdate( l );}
-  hideLevels();
+  if(l>=0 && l<game.l.length){ 
+   levelUpdate( l );
+   game.lock=1;
+   location.hash="#l"+l;
+   setTimeout(function() {game.lock=0;}, 50);   
+  }
+  hideLevels();  
  }
 
  levels.appendChild(e);
 }
 resize();
 //infoShow(levelUpdate);
-levelUpdate(game.i);
+
+var fl=document.querySelector(".fliplogic");
+fl.style.visibility="hidden";
+var l=game.i;
+
+//console.log("location.hash ",location.hash.slice(1,2));
+if(location.hash.slice(1,2) == "l" || location.hash.slice(1,2) == "L"){
+ try{
+  var h=parseInt(location.hash.slice(2));
+//  console.log("h",h);
+  if(h>=0 && h<game.l.length){l=h;}
+  }catch(e){}
+}
+
+//console.log("l",l);
+levelUpdate(l);
 });
 
 window.addEventListener("resize", function(){
  resize();
 }, true);
 
+if (!("onhashchange" in window)) {
+  console.log("The browser doesn't support the hashchange event!");
+}
+
+window.addEventListener("hashchange", function(){
+if (game.lock) return;
+// console.log("hashchange",location.hash);
+if(location.hash.slice(1,2) == "l" || location.hash.slice(1,2) == "L"){
+  var l=parseInt(location.hash.slice(2));
+  if(l>=0 && l<game.l.length){
+   levelUpdate(l);
+  }
+ }
+
+}, false);
+
 </script>
 
 
 
 <script>
-
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -444,6 +546,36 @@ window.addEventListener("resize", function(){
   ga('send', 'pageview');
 
 </script>
+
+
+<script>
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter26098368 = new Ya.Metrika({id:26098368,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+
+<!--
+<noscript><div><img src="//mc.yandex.ru/watch/26098368" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+-->
+
 </body>
 </html>
 
