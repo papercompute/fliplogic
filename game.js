@@ -757,6 +757,7 @@ c:0,
 cb:function(e){
 var boxes=document.querySelectorAll(".gamebox");
 
+if (this.c<30){
 var p1;
 var p2;
 
@@ -784,11 +785,12 @@ move3(boxes[L+i],L+i,p1[j][0],p1[j][1]);
 p1.splice(j,1);
 }
 
-if (this.c<10){
+if (this.c<19){
 var r=Math.round(Math.random()*(this.b.length-1));
 boxes[r].style.backgroundColor="black";
 }
 
+}
 this.c=this.c+1;
 },
 
@@ -805,6 +807,15 @@ for(var i=-4;i<-1;i+=1){
   game.l[l].b.push([i,j,color]);
  }
 }
+
+color="lightgreen";
+for(var i=-1;i<=1;i+=1){
+ for(var j=-4;j<=4;j+=1){
+  if(j%2==0) continue;
+  game.l[l].b.push([i,j,color]);
+ }
+}
+
 
 color="red";
 for(var i=2;i<=4;i+=1){
