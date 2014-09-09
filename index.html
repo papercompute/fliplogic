@@ -3,28 +3,16 @@
 <head>
  <meta charset="utf-8">
  <title>fliplogic</title>
-
+<!--
  <meta name="HandheldFriendly" content="True">
  <meta name="MobileOptimized" content="320">
  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
-
+-->
 <style>
-
-html {
-font-family: sans-serif;
--ms-text-size-adjust: 100%;
--webkit-text-size-adjust: 100%;
-}
-html,body {
-margin: 0;
-min-width: 100px;
-min-height: 100px;
-overflow: auto;
-}
 
 .zeropoint{
  position: absolute;
- left: 44.5%;
+ left: 44.6%;
  top: 44.5%;
  width:12.5%;
  height:12.5%;
@@ -65,6 +53,17 @@ overflow: auto;
 .infoshow h1{
  font-size: 1.5em;
 }
+
+@media only screen and (max-width : 320px) {
+.infoshow{ font-size: 18px;}
+.infoshow h1{ font-size: 18px;}
+}
+
+@media only screen and (max-width : 480px) {
+.infoshow{ font-size: 20px;}
+.infoshow h1{ font-size: 20px;}
+}
+
 
 .infoshow-fx{
  transition: font-size 1.3s;
@@ -117,6 +116,21 @@ overflow: auto;
  font-size: 2em;
 }
 
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+
+.header{
+ font-size: 1em;
+}
+
+.levels a{
+ font-size: 1em;
+}
+
+}
+
+
 .fliplogic{
  position: absolute;
  margin: auto;
@@ -160,6 +174,7 @@ overflow: auto;
 <body ondragstart="return false;" ondrop="return false;">
 -->
 <body>
+
   <div class="fliplogic" style="visibility:visible;">
     <bold>
      <span style="color:blue;">F</span>
@@ -304,7 +319,8 @@ ish1.innerHTML='<p>Level '+game.i+' complite <br> in '+(game.cc+1)+' clicks!</p>
                '<p><a href="#" onclick="javascript:levelUpdate( (game.i ));isHide();return false;">Restart</a></p>'+
                '<p><a href="#" onclick="javascript:levelUpdate( (game.i+1) % game.l.length );isHide();return false;">Next level</a></p>'+
                '<p><a href="#" onclick="javascript:showLevels();window.scrollTo(0,0);isHide();return false;">Choose level</a></p>'+
-               '<p><a href="http://twitter.com/share?url='+escape('http://papercompute.github.io/fliplogic')+'&text='+escape('I just complite #fliplogic #l'+game.i+' in '+(game.cc+1)+' clicks! #indie #indiedev #gamedev #game')+'"'+  'onclick="javascript:window.open(this.href);return false;">Tweet</a></p>';
+               '<p><a href="http://twitter.com/share?url='+escape('http://papercompute.github.io/fliplogic')+'&text='+escape('I just complite #fliplogic #l'+game.i+' in '+(game.cc+1)+' clicks! #indie #indiedev #gamedev #game')+'"'+  'onclick="javascript:window.open(this.href);return false;">Tweet</a></p>'+
+               '<p><a href="https://www.facebook.com/sharer.php?&u=http%3A%2F%2Fpapercompute.github.io%2Ffliplogic%2F">Share on FB</a></p>';
 
 is.style.visibility="visible";
 
@@ -437,8 +453,8 @@ function resize(){
 var box=document.querySelector(".zeropoint");
 
 
-var ww=window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-var wh=window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
+var ww=window.width || window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+var wh=window.height || window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; 
 
 
 var wm=Math.min(ww,wh);
@@ -534,7 +550,7 @@ if(location.hash.slice(1,2) == "l" || location.hash.slice(1,2) == "L"){
 
 </script>
 
-
+<!--
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -571,7 +587,7 @@ if(location.hash.slice(1,2) == "l" || location.hash.slice(1,2) == "L"){
     } else { f(); }
 })(document, window, "yandex_metrika_callbacks");
 </script>
-
+-->
 <!--
 <noscript><div><img src="//mc.yandex.ru/watch/26098368" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 -->
