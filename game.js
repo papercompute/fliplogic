@@ -751,6 +751,76 @@ b:[]
 
 
 
+{// L17
+scale:0.1,
+c:0,
+cb:function(e){
+var boxes=document.querySelectorAll(".gamebox");
+
+var p1;
+var p2;
+
+if (this.c%2==0){
+p1=this.b.slice(0,this.b.length/2);
+p2=this.b.slice(this.b.length/2,this.b.length);
+}
+else{
+p2=this.b.slice(0,this.b.length/2);
+p1=this.b.slice(this.b.length/2,this.b.length);
+}
+
+var L=p2.length;
+for(var i=0;i<L;i++){
+var j=Math.round(Math.random()*(p2.length-1));
+move3(boxes[i],i,p2[j][0],p2[j][1]);
+p2.splice(j,1);
+}
+
+
+var L=p1.length;
+for(var i=0;i<L;i++){
+var j=Math.round(Math.random()*(p1.length-1));
+move3(boxes[L+i],L+i,p1[j][0],p1[j][1]);
+p1.splice(j,1);
+}
+
+if (this.c<10){
+var r=Math.round(Math.random()*(this.b.length-1));
+boxes[r].style.backgroundColor="black";
+}
+
+this.c=this.c+1;
+},
+
+gen:function(l){
+game.l[l].c=0;
+if(game.l[l].b.length>1){return;}
+
+//game.l[l].b.push([0,0,"red"]);
+
+var color="lightgrey";
+
+for(var i=-4;i<-1;i+=1){
+ for(var j=-4;j<=4;j+=1){
+  game.l[l].b.push([i,j,color]);
+ }
+}
+
+color="red";
+for(var i=2;i<=4;i+=1){
+ for(var j=-4;j<=4;j+=1){
+  game.l[l].b.push([i,j,color]);
+ }
+}
+
+
+},
+
+b:[]
+},
+
+
+
 ],
 i:0,
 lock:0,
