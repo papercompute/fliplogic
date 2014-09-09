@@ -3,12 +3,14 @@
 <head>
  <meta charset="utf-8">
  <title>fliplogic</title>
-<!--
+
  <meta name="HandheldFriendly" content="True">
  <meta name="MobileOptimized" content="320">
  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
--->
+
 <style>
+
+
 
 .zeropoint{
  position: absolute;
@@ -55,13 +57,13 @@
 }
 
 @media only screen and (max-width : 320px) {
-.infoshow{ font-size: 18px;}
-.infoshow h1{ font-size: 18px;}
+.infoshow{ font-size: 1.1em;}
+.infoshow h1{ font-size: 1.1em;}
 }
 
-@media only screen and (max-width : 480px) {
-.infoshow{ font-size: 20px;}
-.infoshow h1{ font-size: 20px;}
+@media only screen and (min-width : 321px) and (max-width : 480px) {
+.infoshow{ font-size: 1.3em;}
+.infoshow h1{ font-size: 1.3em;}
 }
 
 
@@ -117,17 +119,15 @@
 }
 
 /* Smartphones (portrait) ----------- */
-@media only screen 
-and (max-width : 320px) {
-
-.header{
- font-size: 1em;
+@media only screen and (max-width : 320px) {
+.header{ font-size: 1em;}
+.levels a{ font-size: 1em;}
 }
 
-.levels a{
- font-size: 1em;
-}
 
+@media only screen and (min-width : 321px) and (max-width : 480px) {
+.header{ font-size: 1.2em;}
+.levels a{ font-size: 1.2em;}
 }
 
 
@@ -152,6 +152,19 @@ and (max-width : 320px) {
  font-size: 1em;
  font-color:lightgray;
 }
+
+@media only screen and (max-width : 320px) {
+.fliplogic{  font-size:1.8em; }
+}
+
+@media only screen and (min-width : 321px) and (max-width : 480px) {
+.fliplogic{  font-size:2.4em; }
+}
+
+@media only screen and (min-width : 481px) and (max-width : 640px) {
+.fliplogic{  font-size:3em; }
+}
+
 
 
 #idReset{
@@ -550,7 +563,7 @@ if(location.hash.slice(1,2) == "l" || location.hash.slice(1,2) == "L"){
 
 </script>
 
-<!--
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -587,10 +600,10 @@ if(location.hash.slice(1,2) == "l" || location.hash.slice(1,2) == "L"){
     } else { f(); }
 })(document, window, "yandex_metrika_callbacks");
 </script>
--->
-<!--
+
+
 <noscript><div><img src="//mc.yandex.ru/watch/26098368" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
--->
+
 
 </body>
 </html>
