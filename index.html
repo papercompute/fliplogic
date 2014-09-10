@@ -491,7 +491,7 @@ var nw=Math.round(wm*p);if(nw>maxw){nw=maxw;}
 var nh=Math.round(wm*p);if(nh>maxh){nh=maxh;}
 //console.log(nw);console.log(nh);
 box.style.width=nw+"px";box.style.height=nh+"px";
-//box.style.left=Math.round((ww-nw)/2)+"px";box.style.top=Math.round((wh-nh)/2)+"px";
+box.style.left=Math.round((ww)/2-(nw)/2-nw*0.05)+"px";box.style.top=Math.round((wh)/2-(nh)/2)+"px";
 }
 
 window.addEventListener("load", function () {
